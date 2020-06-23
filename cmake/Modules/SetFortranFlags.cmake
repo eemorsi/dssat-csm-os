@@ -92,11 +92,11 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                          "-cpp" # GNU
                 )
 
-# Links to a single-threaded, static run-time library 
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
-                 Fortran "/libs:static" # Intel 
-                )
-                
+	## Links to a single-threaded, static run-time library 
+	#SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
+	#                 Fortran "/libs:static" # Intel 
+	#                )
+	#                
 # Tells the linker to search for unresolved references in a multithreaded run-time library
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                  Fortran "/threads" # Intel Windows
@@ -113,6 +113,11 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                  Fortran "-mmacosx-version-min=10.10.0"
                 )
+	#find_package(PDI COMPONENTS f90)
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
+                 Fortran "-I/usr/local/lib/gcc/x86_64-linux-gnu/9/finclude/ -I/usr/local/lib/pdi/finclude/GNU-9.3/"
+                )
+
 ####################
 ### LINKER FLAGS ###
 ####################
@@ -126,16 +131,27 @@ IF (APPLE)
         set(CMAKE_Fortran_LINK_EXECUTABLE "ld ${CMAKE_EXE_LINKER_FLAGS} <OBJECTS> -o <TARGET> <LINK_LIBRARIES>")
     ENDIF()
 ELSE ()
-        SET_COMPILE_FLAG(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}"
-                         Fortran "/FORCE"               # MSVC
-                                 "-static"              # GNU
-                        )
-        SET_COMPILE_FLAG(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}"
-                         Fortran "-static-libgcc"       # GNU
-                        )
-        SET_COMPILE_FLAG(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}"
-                         Fortran "-static-libgfortran"  # GNU
-                        )
+	#        SET_COMPILE_FLAG(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}"
+	#                         Fortran "/FORCE"               # MSVC
+	#                                 "-static"              # GNU
+	#                        )
+	#        SET_COMPILE_FLAG(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}"
+	#                         Fortran "-static-libgcc"       # GNU
+	#                        )
+	#        SET_COMPILE_FLAG(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}"
+	#                         Fortran "-static-libgfortran"  # GNU
+	#                        )
+    SET_COMPILE_FLAG(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}"
+	    	    Fortran "-I/usr/local/lib/gcc/x86_64-linux-gnu/9/finclude/ -I/usr/local/lib/pdi/finclude/GNU-9.3/"
+		    )
+	    #    SET_COMPILE_FLAG(CMAKE_Fortran_LINK_EXECUTABLE "${CMAKE_Fortran_LINK_EXECUTABLE}"
+	    #	    Fortran "${CMAKE_EXE_LINKER_FLAGS} <OBJECTS> -o <TARGET> <LINK_LIBRARIES>     -L/usr/local/lib -lpdi_f90 -lpdi -lparaconf_f90 -lparaconf -lyaml"
+	    #	    )
+    set(CMAKE_Fortran_LINK_EXECUTABLE "f95 ${CMAKE_EXE_LINKER_FLAGS} <OBJECTS> -o <TARGET> <LINK_LIBRARIES> -L/usr/local/lib -lpdi_f90 -lpdi -lparaconf_f90 -lparaconf -lyaml")
+
+	# find_package(PDI COMPONENTS f90)
+	# target_include_directories(<TARGET> "-I/usr/local/lib/gcc/x86_64-linux-gnu/9/finclude/ -I/usr/local/lib/pdi/finclude/GNU-9.3/")
+	# target_link_libraries( "-L/usr/local/lib -lpdi_f90 -lpdi -lparaconf_f90 -lparaconf -lyaml")
 ENDIF(APPLE)
 ###################
 ### DEBUG FLAGS ###
@@ -150,14 +166,14 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
                                   "-O0" # All compilers not on Windows
                 )
 
-# Turn on all warnings 
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
-                 Fortran "/warn:all" # Intel Windows
-                         "-warn all" # Intel
-                         "-Wall"     # GNU
-                                     # Portland Group (on by default)
-                )
-
+	## Turn on all warnings 
+	#SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+	#                 Fortran "/warn:all" # Intel Windows
+	#                         "-warn all" # Intel
+	#                         "-Wall"     # GNU
+	#                                     # Portland Group (on by default)
+	#                )
+	#
 # Traceback
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
                  Fortran "/traceback"   # Intel Windows

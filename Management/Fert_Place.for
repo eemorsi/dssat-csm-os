@@ -46,10 +46,14 @@ C=======================================================================
 !     ------------------------------------------------------------------
       USE FertType_mod
       USE ModuleData
+      USE paraconf
+      USE PDI
+
 
       IMPLICIT  NONE
       SAVE
 !     ------------------------------------------------------------------
+      TYPE(PC_tree_t),target :: conf
 
       CHARACTER*1  IFERI, RNMODE
       CHARACTER*2  FERTYPEN
@@ -111,35 +115,35 @@ C=======================================================================
 !     IF (IFERI .EQ. 'N') RETURN
 
 !       ===================================================
-!       º    Fertilizer types as given in appendix 4,     º
-!       º    Technical Report 1,IBSNAT (1986).            º
-!       º                                                 º
-!       º      1   = Ammonium Nitrate                     º
-!       º      2   = Ammonium Sulphate                    º
-!       º      3   = Ammonium Nitrate Sulphate            º
-!       º      4   = Anhydrous Ammonia                    º
-!       º      5   = Urea                                 º
-!       º      51  = Urea Super Granule                   º
-!       º      6   = Diammonium Phosphate                 º
-!       º      7   = Monoammonium Phosphate               º
-!       º      8   = Calcium Nitrate                      º
-!       º      9   = Aqua Ammonia                         º
-!       º     10   = Urea Ammonium Nitrate                º
-!       º     11   = Calcium Ammonium Nitrate             º
-!       º     12   = Ammonium poly-phosphate              º
-!       º     13   = Single super phosphate               º
-!       º     14   = Triple super phosphate               º
-!       º     15   = Liquid phosphoric acid               º
-!       º     16   = Potassium chloride                   º
-!       º     17   = Potassium Nitrate                    º
-!       º     18   = Potassium sulfate                    º
-!       º     19   = Urea super granules                  º
-!       º     20   = Dolomitic limestone                  º
-!       º     21   = Rock phosphate                       º
-!       º     22   = Calcitic limestone                   º
-!       º     24   = Rhizobium                            º
-!       º     26   = Calcium hydroxide                    º
-!       º  19-22   = Reserved for control release fert.   º
+!       ï¿½    Fertilizer types as given in appendix 4,     ï¿½
+!       ï¿½    Technical Report 1,IBSNAT (1986).            ï¿½
+!       ï¿½                                                 ï¿½
+!       ï¿½      1   = Ammonium Nitrate                     ï¿½
+!       ï¿½      2   = Ammonium Sulphate                    ï¿½
+!       ï¿½      3   = Ammonium Nitrate Sulphate            ï¿½
+!       ï¿½      4   = Anhydrous Ammonia                    ï¿½
+!       ï¿½      5   = Urea                                 ï¿½
+!       ï¿½      51  = Urea Super Granule                   ï¿½
+!       ï¿½      6   = Diammonium Phosphate                 ï¿½
+!       ï¿½      7   = Monoammonium Phosphate               ï¿½
+!       ï¿½      8   = Calcium Nitrate                      ï¿½
+!       ï¿½      9   = Aqua Ammonia                         ï¿½
+!       ï¿½     10   = Urea Ammonium Nitrate                ï¿½
+!       ï¿½     11   = Calcium Ammonium Nitrate             ï¿½
+!       ï¿½     12   = Ammonium poly-phosphate              ï¿½
+!       ï¿½     13   = Single super phosphate               ï¿½
+!       ï¿½     14   = Triple super phosphate               ï¿½
+!       ï¿½     15   = Liquid phosphoric acid               ï¿½
+!       ï¿½     16   = Potassium chloride                   ï¿½
+!       ï¿½     17   = Potassium Nitrate                    ï¿½
+!       ï¿½     18   = Potassium sulfate                    ï¿½
+!       ï¿½     19   = Urea super granules                  ï¿½
+!       ï¿½     20   = Dolomitic limestone                  ï¿½
+!       ï¿½     21   = Rock phosphate                       ï¿½
+!       ï¿½     22   = Calcitic limestone                   ï¿½
+!       ï¿½     24   = Rhizobium                            ï¿½
+!       ï¿½     26   = Calcium hydroxide                    ï¿½
+!       ï¿½  19-22   = Reserved for control release fert.   ï¿½
 !       ===================================================
 
       DYNAMIC = CONTROL % DYNAMIC
@@ -200,7 +204,7 @@ C-----------------------------------------------------------------------
       ENDIF
 
 !###AJG  Needs an automatic P fertilizer option in fileX ???
-
+      CALL PDI_init(PC_get(conf, ".pdi"))
 !     ------------------------------------------------------------------
 !     Find FERTILIZER Section
 !     ------------------------------------------------------------------
@@ -354,17 +358,21 @@ C-----------------------------------------------------------------------
         NIDATA % NIEND = YRDOY
       ENDIF
 
+      print * , 'NFERT val: ', NFERT
       FertLoop: DO I = 1, NFERT
         FERTILIZE_TODAY = .FALSE.
+        print *, 'IFERI val: ', IFERI
 !       ------------------------------------------------------------------
 !       Fertilize on specified dates (YYDDD format)
 !       ------------------------------------------------------------------
         IF (NFERT > 0 .AND. IFERI == 'R') THEN
+
           IF (YRDOY == FDAY(I)) THEN
             FERTILIZE_TODAY = .TRUE.
           ELSEIF (FDAY(I) .GT. YRDOY) THEN
             EXIT FertLoop
           ENDIF
+!       Essam: skip this section and NFERT to 1 -->
 !       ------------------------------------------------------------------
 !       Fertilize on specified days (DDD format)
 !       ------------------------------------------------------------------
@@ -376,6 +384,9 @@ C-----------------------------------------------------------------------
           ELSEIF (FDAY(I) .GT. DAP) THEN
             EXIT FertLoop
           ENDIF
+!       Essam: modify the 'IFERT' Learning option
+        ELSEIF (NFERT > 0 .AND. IFERI == 'L') THEN
+
         ENDIF
 
         IF (.NOT. FERTILIZE_TODAY) CYCLE
