@@ -77,6 +77,8 @@ C=======================================================================
       USE ModuleDefs 
       USE ModuleData
       USE HeaderMod
+      USE paraconf
+      USE PDI
 
       IMPLICIT NONE
 C-----------------------------------------------------------------------
@@ -113,6 +115,8 @@ C     The variable "CONTROL" is of type "ControlType".
 
 C     The variable "ISWITCH" is of type "SwitchType".
       TYPE (SwitchType) ISWITCH
+C     define the configurations of the pdi
+      TYPE(PC_tree_t),target :: conf
 
 !C-----------------------------------------------------------------------
 
@@ -244,6 +248,13 @@ C-----------------------------------------------------------------------
       CONTROL % REPNO = REPNO
 
 C*********************************************************************** 
+C-----------------------------------------------------------------------
+C     Initialize PDI/FlowVR for data expose
+C-----------------------------------------------------------------------
+!     Pass the conf / parse it ?!
+!     update the path of the yml file to be an argument passed to the program
+      CALL PC_parse_path("put.yml", conf)
+      CALL PDI_init(PC_get(conf, ".pdi"))
 C*********************************************************************** 
 C     RUN INITIALIZATION
 C***********************************************************************
@@ -551,6 +562,12 @@ C-----------------------------------------------------------------------
       CALL OPNAMES(FNAME)
 
       CALL RUNLIST(CONTROL)
+
+C-----------------------------------------------------------------------
+C     Finialize PDI/FlowVR data sharing
+C-----------------------------------------------------------------------
+      CALL PDI_finalize()
+      CALL PC_tree_destroy(conf)
 
       END PROGRAM CSM 
 

@@ -28,6 +28,9 @@ C-----------------------------------------------------------------------
       USE ModuleDefs      
       USE FloodModule      
       USE CsvOutput   ! VSH 
+!      USE paraconf
+!      USE PDI
+
 
       IMPLICIT NONE
       SAVE
@@ -124,6 +127,9 @@ C     ModuleDefs.for.
       TYPE (ControlType) CONTROL
       TYPE (SwitchType)  ISWITCH
 
+
+!      TYPE(PC_tree_t),target :: conf
+
 C     Transfer values from constructed data types into local variables.
       CROP    = CONTROL % CROP
       DYNAMIC = CONTROL % DYNAMIC
@@ -135,9 +141,18 @@ C     Transfer values from constructed data types into local variables.
       IPLTI   = ISWITCH % IPLTI
 
 C***********************************************************************
+!C-----------------------------------------------------------------------
+!C     Initialize PDI/FlowVR for data expose
+!C-----------------------------------------------------------------------
+!!     Pass the conf / parse it ?!
+!!     update the path of the yml file to be an argument passed to the program
+!      CALL PC_parse_path("put.yml", conf)
+!      CALL PDI_init(PC_get(conf, ".pdi"))
+
 C***********************************************************************
 C     Run Initialization - Called once per simulation
 C***********************************************************************
+
       IF (DYNAMIC .EQ. RUNINIT) THEN
 C-----------------------------------------------------------------------
 !!     Temporary timer function
@@ -563,5 +578,11 @@ C***********************************************************************
 !     END OF DYNAMIC IF CONSTRUCT
 !***********************************************************************
       ENDIF
+!C-----------------------------------------------------------------------
+!C     Finialize PDI/FlowVR data sharing
+!C-----------------------------------------------------------------------
+!      CALL PDI_finalize()
+!      CALL PC_tree_destroy(conf)
+
       RETURN
       END SUBROUTINE LAND 
