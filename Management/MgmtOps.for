@@ -41,6 +41,9 @@ C=====================================================================
 C-----------------------------------------------------------------------
       USE ModuleDefs
       USE FloodModule
+      USE paraconf
+      USE PDI
+
       IMPLICIT NONE
       SAVE
 
@@ -85,6 +88,7 @@ C-----------------------------------------------------------------------
       TYPE (OrgMatAppType)OMAData
       TYPE (WeatherType)  WEATHER
       Type (ResidueType)  HARVRES  
+      TYPE(PC_tree_t),target :: conf
 
 !     Transfer values from constructed data types into local variables.
       CROP    = CONTROL % CROP  
@@ -157,11 +161,18 @@ C-----------------------------------------------------------------------
      &    DLAYR, DUL, IDETO, IHARI, LL, STGDOY,           !Input
      &    SW, MDATE, YRPLT,                               !Input
      &    YREND, HARVFRAC, HDATE, NHAR)                   !Output
+C-----------------------------------------------------------------------
+C     Initialize PDI/FlowVR for data expose
+C-----------------------------------------------------------------------
+!     Pass the conf / parse it ?!
+!     update the path of the yml file to be an argument passed to the program
+      CALL PC_parse_path("put.yml", conf)
+      CALL PDI_init(PC_get(conf, ".pdi"))
     
       IF (ISWCHE .EQ. 'Y') THEN
         CALL Chemical(CONTROL, ISWITCH, NCHEM)
       ENDIF
-
+      PRINT *, 'from MgmtOps 165'
       CALL Fert_Place (CONTROL, ISWITCH, 
      &  DLAYR, DS, FLOOD, NLAYR, YRPLT,           !Input
      &  FERTDATA)                                 !Output
@@ -210,6 +221,7 @@ C-----------------------------------------------------------------------
      &    DLAYR, DUL, FLOOD, IDETO, IPLTI, LL, ST, SW,    !Input
      &    MDATE, YRPLT)                                   !Output
       ENDIF
+!      PRINT *, 'from MgmtOps 214'
 
       CALL Fert_Place (CONTROL, ISWITCH, 
      &  DLAYR, DS, FLOOD, NLAYR, YRPLT,           !Input
@@ -319,6 +331,12 @@ C     END OF DYNAMIC IF CONSTRUCT
 C***********************************************************************
       ENDIF
 C***********************************************************************
+
+C-----------------------------------------------------------------------
+C     Finialize PDI/FlowVR data sharing
+C-----------------------------------------------------------------------
+      CALL PDI_finalize()
+      CALL PC_tree_destroy(conf)
 
       RETURN
       END SUBROUTINE MGMTOPS

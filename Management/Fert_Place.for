@@ -53,7 +53,7 @@ C=======================================================================
       IMPLICIT  NONE
       SAVE
 !     ------------------------------------------------------------------
-      TYPE(PC_tree_t),target :: conf
+!      TYPE(PC_tree_t),target :: conf
 
       CHARACTER*1  IFERI, RNMODE
       CHARACTER*2  FERTYPEN
@@ -72,6 +72,7 @@ C=======================================================================
       INTEGER YR, YRDIF, YRDNIT, YRDOY, YRPLT, YRSIM
       INTEGER METFER
       INTEGER FDAY(NAPPL), FERTYP(NAPPL)
+      INTEGER WAIT !PDI waiting for the arrival of the new data
 
       REAL DSOILN , FERDEPTH,  !, FERMIXPERC,
      &  FERNIT, FERPHOS, FERPOT, SOILNC, SOILNX
@@ -149,6 +150,11 @@ C=======================================================================
       DYNAMIC = CONTROL % DYNAMIC
       YRDOY   = CONTROL % YRDOY
 
+!     Pass the conf / parse it ?!
+!     update the path of the yml file to be an argument passed to the program
+!     CALL PC_parse_path("put.yml", conf)
+!     CALL PDI_init(PC_get(conf, ".pdi"))
+
 !***********************************************************************
 !***********************************************************************
 !     Seasonal initialization - run once per season
@@ -204,7 +210,7 @@ C-----------------------------------------------------------------------
       ENDIF
 
 !###AJG  Needs an automatic P fertilizer option in fileX ???
-      CALL PDI_init(PC_get(conf, ".pdi"))
+
 !     ------------------------------------------------------------------
 !     Find FERTILIZER Section
 !     ------------------------------------------------------------------
@@ -359,6 +365,9 @@ C-----------------------------------------------------------------------
       ENDIF
 
       print * , 'NFERT val: ', NFERT
+
+
+
       FertLoop: DO I = 1, NFERT
         FERTILIZE_TODAY = .FALSE.
         print *, 'IFERI val: ', IFERI
@@ -372,10 +381,13 @@ C-----------------------------------------------------------------------
           ELSEIF (FDAY(I) .GT. YRDOY) THEN
             EXIT FertLoop
           ENDIF
+
 !       Essam: skip this section and NFERT to 1 -->
 !       ------------------------------------------------------------------
 !       Fertilize on specified days (DDD format)
 !       ------------------------------------------------------------------
+!        CALL PDI_expose("WAIT", WAIT, PDI_IN)
+
         ELSEIF (NFERT > 0 .AND. IFERI == 'D') THEN
           DAP = MAX (0, TIMDIF(YRPLT, YRDOY))
           IF ((FDAY(I) .NE. 0 .AND. DAP == FDAY(I)) .OR.
@@ -402,6 +414,9 @@ C       Convert character codes for fertilizer method into integer
         CALL FERTILIZERTYPE (ISWITCH,
      &    ANFER(I), APFER(I), AKFER(I), FERTYPE, FERTYPE_CDE(I), !Input
      &    HASN, HASP, HASK, HASUI, HASNI, HASCR)                 !Output
+        CALL PDI_expose("HASN", HASN, PDI_OUT)
+!        CALL PDI_expose("HASP", HASP, PDI_OUT)
+!        CALL PDI_expose("HASK", HASK, PDI_OUT)
 
         IF (HASN) THEN    !Do this only if NOT slow release
 !         Set the amount of N to be applied and sum total amount of
@@ -506,6 +521,7 @@ C       Convert character codes for fertilizer method into integer
 !----------------------------------------------------------------------
 
       ENDDO FertLoop
+!
 
 !----------------------------------------------------------------------
 !     Look for slow release N today
@@ -647,6 +663,9 @@ C-----------------------------------------------------------------------
 
 !     Transfer data to ModuleData
       CALL PUT('MGMT','FERNIT',AMTFER(N))
+!     Finalize the PDI/Flowvr expose mode
+!      CALL PDI_finalize()
+!      CALL PC_tree_destroy(conf)
 
       RETURN
       END SUBROUTINE Fert_Place
