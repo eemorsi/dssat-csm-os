@@ -72,7 +72,9 @@ C=======================================================================
       INTEGER YR, YRDIF, YRDNIT, YRDOY, YRPLT, YRSIM
       INTEGER METFER
       INTEGER FDAY(NAPPL), FERTYP(NAPPL)
+
       INTEGER WAIT !PDI waiting for the arrival of the new data
+      INTEGER READ_RL_VALS !
 
       REAL DSOILN , FERDEPTH,  !, FERMIXPERC,
      &  FERNIT, FERPHOS, FERPOT, SOILNC, SOILNX
@@ -150,11 +152,6 @@ C=======================================================================
       DYNAMIC = CONTROL % DYNAMIC
       YRDOY   = CONTROL % YRDOY
 
-!     Pass the conf / parse it ?!
-!     update the path of the yml file to be an argument passed to the program
-!     CALL PC_parse_path("put.yml", conf)
-!     CALL PDI_init(PC_get(conf, ".pdi"))
-
 !***********************************************************************
 !***********************************************************************
 !     Seasonal initialization - run once per season
@@ -228,6 +225,7 @@ C-----------------------------------------------------------------------
 
           READ(CHAR,'(1X,A5,1X,A5,4F6.0)',IOSTAT=ERRNUM) FERTYPE_CDE(I),
      &      FERMET(I), FERDEP(I), ANFER(I), APFER(I), AKFER(I)
+
           IF (ERRNUM .NE. 0) CALL ERROR(ERRKEY, ERRNUM, FILEIO, LNUM)
 
           READ(FERTYPE_CDE(I),'(2X,I3)') FERTYP(I)

@@ -101,6 +101,7 @@ C-----------------------------------------------------------------------
       INTEGER       YRSIM_SAVE, YRDIF, YRDOY_END !IP,IPX, 
       INTEGER       LUNBIO,LINBIO,ISECT,IFIND,LN
       INTEGER       NREPS, REPNO,END_POS, ROTNUM, TRTREP, NARG
+      INTEGER       RUN_SE
 
       LOGICAL       FEXIST, DONE
 
@@ -122,7 +123,6 @@ C     define the configurations of the pdi
 
       DONE = .FALSE.
       YRDOY_END = 9999999
-
 !     Pick up model version for setting the name of some files
       WRITE(ModelVerTxt,'(I2.2,I1)') Version%Major, Version%Minor
 
@@ -255,6 +255,11 @@ C-----------------------------------------------------------------------
 !     update the path of the yml file to be an argument passed to the program
       CALL PC_parse_path("put.yml", conf)
       CALL PDI_init(PC_get(conf, ".pdi"))
+
+!     initiate main loop reading of the learner ...
+      RUN_SE=1
+      CALL PDI_expose("RUN_SE", RUN_SE, PDI_OUT)
+
 C*********************************************************************** 
 C     RUN INITIALIZATION
 C***********************************************************************
@@ -566,6 +571,9 @@ C-----------------------------------------------------------------------
 C-----------------------------------------------------------------------
 C     Finialize PDI/FlowVR data sharing
 C-----------------------------------------------------------------------
+      RUN_SE = 0
+      CALL PDI_expose("RUN_SE", RUN_SE, PDI_OUT) ! exit learner main loop
+
       CALL PDI_finalize()
       CALL PC_tree_destroy(conf)
 
