@@ -6,7 +6,7 @@ pdi:
     RUN_SE: int
     HASN: int
 
-  plugin:
+  plugins:
     flowvr:
       component: module
       wait_on_data: RUN_SE
