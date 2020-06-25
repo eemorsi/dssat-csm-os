@@ -1,0 +1,16 @@
+pdi:
+  logging:
+    level: debug
+
+  data:
+    RUN_SE: int
+    HASN: int
+
+  plugin:
+    flowvr:
+      component: module
+      wait_on_data: RUN_SE
+      input_ports:
+        text: # port_name 
+          data: HASN
+          

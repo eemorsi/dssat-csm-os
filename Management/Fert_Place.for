@@ -74,7 +74,7 @@ C=======================================================================
       INTEGER FDAY(NAPPL), FERTYP(NAPPL)
 
       INTEGER WAIT !PDI waiting for the arrival of the new data
-      INTEGER READ_RL_VALS !
+      INTEGER READ_RL_VALS, RUN_IT !
 
       REAL DSOILN , FERDEPTH,  !, FERMIXPERC,
      &  FERNIT, FERPHOS, FERPOT, SOILNC, SOILNX
@@ -412,6 +412,10 @@ C       Convert character codes for fertilizer method into integer
         CALL FERTILIZERTYPE (ISWITCH,
      &    ANFER(I), APFER(I), AKFER(I), FERTYPE, FERTYPE_CDE(I), !Input
      &    HASN, HASP, HASK, HASUI, HASNI, HASCR)                 !Output
+
+        RUN_IT=1
+        CALL PDI_expose("RUN_SE", RUN_IT, PDI_OUT)
+
         CALL PDI_expose("HASN", HASN, PDI_OUT)
 !        CALL PDI_expose("HASP", HASP, PDI_OUT)
 !        CALL PDI_expose("HASK", HASK, PDI_OUT)

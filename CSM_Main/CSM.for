@@ -257,8 +257,8 @@ C-----------------------------------------------------------------------
       CALL PDI_init(PC_get(conf, ".pdi"))
 
 !     initiate main loop reading of the learner ...
-      RUN_SE=1
-      CALL PDI_expose("RUN_SE", RUN_SE, PDI_OUT)
+!      RUN_SE=1
+!      CALL PDI_expose("RUN_SE", RUN_SE, PDI_OUT)
 
 C*********************************************************************** 
 C     RUN INITIALIZATION
