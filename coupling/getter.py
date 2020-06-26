@@ -20,7 +20,7 @@ if __name__ == '__main__':
     pdi.expose('RUN_SE', RUN , pdi.IN)
     
     while(RUN != 0):
-        pdi.expose("HASN", HASN, PDI_IN)
+        pdi.expose("HASN", HASN, pdi.IN)
         print("HASN: {}".format(HASN))
         
         pdi.expose('RUN_SE', RUN , pdi.IN)

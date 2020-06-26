@@ -414,7 +414,7 @@ C       Convert character codes for fertilizer method into integer
      &    HASN, HASP, HASK, HASUI, HASNI, HASCR)                 !Output
 
         RUN_IT=1
-        CALL PDI_expose("RUN_SE", RUN_IT, PDI_OUT)
+        CALL PDI_expose("RUN_SE", RUN_IT, PDI_IN)
 
         CALL PDI_expose("HASN", HASN, PDI_OUT)
 !        CALL PDI_expose("HASP", HASP, PDI_OUT)

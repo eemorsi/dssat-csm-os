@@ -572,7 +572,7 @@ C-----------------------------------------------------------------------
 C     Finialize PDI/FlowVR data sharing
 C-----------------------------------------------------------------------
       RUN_SE = 0
-      CALL PDI_expose("RUN_SE", RUN_SE, PDI_OUT) ! exit learner main loop
+      CALL PDI_expose("RUN_SE", RUN_SE, PDI_IN) ! exit learner main loop
 
       CALL PDI_finalize()
       CALL PC_tree_destroy(conf)
