@@ -30,7 +30,7 @@ if __name__ == '__main__':
         pdi.expose('RUN_SE', RL_VALs, pdi.IN)
 
         # pass fertilization data to the simulator
-        pdi.expose("RL_FERT_VAL", SIM_FERT_VAL, pdi.out)
+        pdi.expose("RL_FERT_VAL", SIM_FERT_VAL, pdi.OUT)
 
         pdi.expose("HASN", HASN, pdi.IN)
         print("HASN: {}".format(HASN))
