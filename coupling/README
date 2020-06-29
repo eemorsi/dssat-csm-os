@@ -1,0 +1,145 @@
+Compile and Install PDI FlowVR:
+
+https://gitlab.inria.fr/flowvr/flowvr-ex.git
+tar -czvf flowvr-ex.tar.gz flowvr-ex
+
+wget https://gitlab.maisondelasimulation.fr/pdidev/pdi/-/archive/0.6.0/pdi-0.6.0.tar.bz2
+tar -xjf pdi-0.6.0.tar.bz2
+cd pdi-0.6.0
+cp ../flowvr-ex.tar.gz vendor/.
+
+# In CMakeList.txt file change "BUILD_FLOWVR_PLUGIN"/EMBEDDED_PATH to point to the new vendor package 
+
+cmake -DUSE_HDF5=EMBEDDED -DBUILD_FLOWVR_PLUGIN=ON -DUSE_FlowVR=AUTO -DBUILD_PYCALL_PLUGIN=ON -DBUILD_PYTHON=ON ..
+sudo make install 
+
+# Possible error:
+1- FLowVR/PDI is bassed on python 2 while the new version of flowvr is partially python3 
+   So "pdi_flowvr.py" file might have some python2 calls
+2- Make sure that the minor python version is the same as used by PDI if not you may need to update package installation manually or relocate it 
+
+# Compile and run DSSAT
+mkdir build; cd build
+cmake DCMAKE_BUILD_TYPE="DEBUG" -DCMAKE_INSTALL_PREFIX=~/dssat/BUILD ..
+
+# Copy all require data files into you build directory 
+# Copy all files in the coupling directory to the build path 
+
+# Run DSSAT
+cd ~/dssat/BUILD
+Run source /usr/local/flowvr-config.sh. Now your environment is ready.
+Run flowvr daemon on your system (best in new terminal, repeat 1. and 2.): flowvrd --top
+python CSM.py
+flowvr csm
+
+
+How Fert_Place.for works?
+#########################
+1) the program goes once through .MZX file to fill arrays with characteristics of fertilization applications, loop l 215
+
+for each application:
+    in the .MZX, those variables as defined in *FERTILIZERS (INORGANIC) part:
+        FDATE, FMCD, FACD, FERTMET, FDEP, FAMN, FAMP, FAMK 
+
+        Are assigned to:
+
+        FDAY(I), FERTYPE_CDE(I), FERMET(I), FERDEP(I), ANFER(I), APFER(I), AKFER(I)
+
+    -> You can find all variable significations for .MZX in "DATA.CDE" in the main folder of compiled DSSAT
+
+    -> You have list and description of used Fortran variables at the end of Fert_place.for
+
+I: index of fertilization specification record in the .MZX 
+    If you run: run_dssat C UFGA8201.MZX 1, 1 means experiment #1, so in UFGA8201.MZX/*FERTILIZERS (INORGANIC) DSSAT will read lines with  @F == 1
+
+NFERT counts the number of records for selected experiment: NFERT = max(I)
+
+Note that there are data checks and the FERTYPE_CDE(I) is formated: "READ(FERTYPE_CDE(I),'(2X,I3)') FERTYP(I)"
+
+
+2) the program goes each simulation day in "Fertloop"
+
+each day, it checks for all records for I in 1...NFERT and triggers fertilization if FDAY(I) == YRDOY i.e. if application date in the record corresponds to today's simulation date
+
+in case FDAY(I) == YRDOY then FERTILIZE_TODAY = .TRUE., then below subroutines FERTILIZERTYPE, FertLayers, FertApply are called. You do not need to modify those subroutines.
+
+
+
+
+
+#########################
+What needs to be modified
+#########################
+
+
+the variable IFERI corresponds to FERTI in .MZX/*SIMULATION CONTROLS ; it is then used to modify Fert_place.for according to chosen fertilization option
+
+We will introduce the new value IFERI = 'L' for RL application ; all modifications to be applied only if IFERI == 'L' in .MZX/*SIMULATION CONTROLS
+
+1) We do not read values FDAY(I), FERTYPE_CDE(I), FERMET(I), FERDEP(I), ANFER(I), APFER(I), AKFER(I) from .MZX, loop l 215
+
+2) We set NFERT to 1
+
+3) In fert_loop, values to be modified are FERTYPE_CDE(I), FERMET(I), FERDEP(I), ANFER(I), APFER(I), AKFER(I)
+
+    If no input from python, we cycle the loop 
+    @-----
+    @ doesn't add anything it can be infinite loop instead force reading of values from python 
+    @-----
+
+    If not (ANFER_RL == 0 and APFER_RL == 0 and AKFER_RL == 0):  # inputs from RL program
+
+        Because we set NFERT to 1, we just need to overwrite FERTYPE_CDE(1), FERMET(1), FERDEP(1), ANFER(1), APFER(1), AKFER(1)
+        @-----------
+        @ FERTYPE_CDE(1), FERMET(1) are characters can't be passed back and forth with python 
+        @ The remaining real and integer values can be overwrite easily 
+        @-----------
+
+        We perform same checks as in loop l 215 and formatting
+
+    We exit the Fertloop if STGDOY(5) == YRDOY
+
+    We can ask RL program input each PERIOD simulation days, for instance PERIOD = 7 ; everyday until STGDOY(5) == YRDOY is too much
+
+
+
+
+
+#########################
+Features describing state
+#########################
+
+
+YRSIM - YRDOY
+
+defined in Plant.for:
+
+    NSTRESS 
+
+    NO3(L) for L in NL
+
+    NH4(L) for L in NL
+
+    SW(L) for L in NL
+
+    XLAI
+
+    SOILPROP (! composite variable)
+
+    STGDOY (! current value in plant.for not whole STGDOY(20))
+
+Weather measurements:
+
+    intemerdiate EPCM value as computed in OPSUM.for
+
+Weather predictions :
+
+    When 'W' is set as parameter for *SIMULATION CONTROLS at 'WTHER' in the .MZX, DSSAT uses a daily based weather simulation that you can find in 'WGEN.for'
+
+    The global seed, that you can find *SIMULATION CONTROLS at 'RSEED' sets the seed for the WGEN SIMULATOR. 
+    
+    The problem is that those simulations are run on the fly, on a daily basis:
+
+        We need to retrieve daily SRAD,TMAX,TMIN,RAIN,PAR from WGENGN subroutine in 'WGEN.for' for DOY in YRDOY:(YRDOY+N):
+
+            We need to retrieve simulated weather for next N days, say N=14, then in python env I will add noise to those values and use it as weather predictions
