@@ -1,4 +1,5 @@
 Compile and Install PDI FlowVR:
+--------------------------
 
 https://gitlab.inria.fr/flowvr/flowvr-ex.git
 tar -czvf flowvr-ex.tar.gz flowvr-ex
@@ -19,6 +20,8 @@ sudo make install
 2- Make sure that the minor python version is the same as used by PDI if not you may need to update package installation manually or relocate it 
 
 # Compile and run DSSAT
+--------------------------
+
 mkdir build; cd build
 cmake DCMAKE_BUILD_TYPE="DEBUG" -DCMAKE_INSTALL_PREFIX=~/dssat/BUILD ..
 
@@ -26,6 +29,8 @@ cmake DCMAKE_BUILD_TYPE="DEBUG" -DCMAKE_INSTALL_PREFIX=~/dssat/BUILD ..
 # Copy all files in the coupling directory to the build path 
 
 # Run DSSAT
+--------------------------
+
 cd ~/dssat/BUILD
 Run source /usr/local/flowvr-config.sh. Now your environment is ready.
 Run flowvr daemon on your system (best in new terminal, repeat 1. and 2.): flowvrd --top
@@ -33,8 +38,10 @@ python CSM.py
 flowvr csm
 
 
+--------------------------
+
 How Fert_Place.for works?
-#########################
+--------------------------
 1) the program goes once through .MZX file to fill arrays with characteristics of fertilization applications, loop l 215
 
 for each application:
@@ -67,9 +74,9 @@ in case FDAY(I) == YRDOY then FERTILIZE_TODAY = .TRUE., then below subroutines F
 
 
 
-#########################
+--------------------------
 What needs to be modified
-#########################
+--------------------------
 
 
 the variable IFERI corresponds to FERTI in .MZX/*SIMULATION CONTROLS ; it is then used to modify Fert_place.for according to chosen fertilization option
@@ -105,9 +112,9 @@ We will introduce the new value IFERI = 'L' for RL application ; all modificatio
 
 
 
-#########################
+--------------------------
 Features describing state
-#########################
+--------------------------
 
 
 YRSIM - YRDOY
