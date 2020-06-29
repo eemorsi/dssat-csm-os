@@ -39,13 +39,12 @@ C                 single day with different fertilizer types and depths.
 !  Calls  : Function IDLAYR
 C=======================================================================
 
-      SUBROUTINE Fert_Place (CONTROL, ISWITCH, 
-     &  DLAYR, DS, FLOOD, NLAYR, YRPLT,           !Input
-     &  FERTDATA)                                 !Output
+      SUBROUTINE Fert_Place (CONTROL,ISWITCH,DLAYR,DS,FLOOD,NLAYR,YRPLT,
+     &   !InputFERTDATA)                                 !Output
 
 !     ------------------------------------------------------------------
       USE FertType_mod
-      USE ModuleData
+      USE moduleData
       USE paraconf
       USE PDI
 
@@ -55,35 +54,35 @@ C=======================================================================
 !     ------------------------------------------------------------------
 !      TYPE(PC_tree_t),target :: conf
 
-      CHARACTER*1  IFERI, RNMODE
+      CHARACTER*1  IFERI,RNMODE
       CHARACTER*2  FERTYPEN
-      CHARACTER*5  FERMET(NAPPL), FERTYPE_CDE(NAPPL)
+      CHARACTER*5  FERMET(NAPPL),FERTYPE_CDE(NAPPL)
       CHARACTER*6  SECTION
       CHARACTER*7  AppType
       CHARACTER*30 FILEIO 
       CHARACTER*78 MSG(10)
       CHARACTER*90 CHAR
-      CHARACTER*6, PARAMETER :: ERRKEY = 'FPLACE'
+      CHARACTER*6,parameter :: ERRKEY = 'FPLACE'
 
-      INTEGER DAP, DYNAMIC, ERRNUM, FERTDAY, FERTYPE,
-     &  FOUND, FTYPEN, I, IDATE,    
-     &  LINC, LNUM, LUNIO, MULTI, NAPFER(NELEM), 
-     &  NFERT, NLAYR, TIMDIF
-      INTEGER YR, YRDIF, YRDNIT, YRDOY, YRPLT, YRSIM
-      INTEGER METFER
-      INTEGER FDAY(NAPPL), FERTYP(NAPPL)
+      integer DAP,DYNAMIC,ERRNUM,FERTDAY,FERTYPE,FOUND,FTYPEN,I,IDATE,
+     &   LINC,LNUM,LUNIO,MULTI,NAPFER(NELEM),NFERT,NLAYR,TIMDIF
+      integer YR,YRDIF,YRDNIT,YRDOY,YRPLT,YRSIM
+      integer METFER
+      integer FDAY(NAPPL),FERTYP(NAPPL)
 
-      INTEGER WAIT !PDI waiting for the arrival of the new data
-      INTEGER READ_RL_VALS, RUN_IT !
+      integer WAIT !PDI waiting for the arrival of the new data
+      integer READ_RL_VALS,RUN_IT !
 
-      REAL DSOILN , FERDEPTH,  !, FERMIXPERC,
-     &  FERNIT, FERPHOS, FERPOT, SOILNC, SOILNX
+      REAL DSOILN ,FERDEPTH,!,FERMIXPERC,FERNIT,FERPHOS,FERPOT,SOILNC,
+     &   SOILNX
 
       REAL FERMIXPERC
 
-      REAL AMTFER(NELEM), ANFER(NAPPL), APFER(NAPPL), AKFER(NAPPL), 
-     &  DLAYR(NL), DS(NL), ADDSNH4(NL), ADDSPi(NL), ADDSKi(NL),
-     &  ADDSNO3(NL), ADDUREA(NL), FERDEP(NAPPL)
+      REAL AMTFER(NELEM),ANFER(NAPPL),APFER(NAPPL),AKFER(NAPPL),
+     &   DLAYR(NL),DS(NL),ADDSNH4(NL),ADDSPi(NL),ADDSKi(NL),ADDSNO3(NL),
+     &   ADDUREA(NL),FERDEP(NAPPL)
+
+     REAL,DIMENSION(4) :: RL_FERT_VAL
 
       TYPE (ControlType) CONTROL
       TYPE (SwitchType)  ISWITCH
@@ -91,22 +90,22 @@ C=======================================================================
 
       LOGICAL UNINCO
 
-      REAL ADDFUREA, ADDFNO3, ADDFNH4
-      REAL FLOOD, ADDOXU, ADDOXH4, ADDOXN3
+      REAL ADDFUREA,ADDFNO3,ADDFNH4
+      REAL FLOOD,ADDOXU,ADDOXH4,ADDOXN3
 
 !     Added with flexible fertilizer types
       LOGICAL FIRST
-      LOGICAL HASN, HASP, HASK, FERTILIZE_TODAY
-      LOGICAL HASUI, HASNI, HASCR
+      LOGICAL HASN,HASP,HASK,FERTILIZE_TODAY
+      LOGICAL HASUI,HASNI,HASCR
 
-      REAL FERNO3, FERNH4, FERUREA
-      INTEGER INCDAT, L, NSR
+      REAL FERNO3,FERNH4,FERUREA
+      integer INCDAT,L,NSR
 
-      REAL N0, NRL50, KN, AN
-      REAL CumRelYesterday, CumRelToday, AmtRelToday
-      REAL TIME, Tlinear, Y
+      REAL N0,NRL50,KN,AN
+      REAL CumRelYesterday,CumRelToday,AmtRelToday
+      REAL TIME,Tlinear,Y
 
-      INTEGER KMAX
+      integer KMAX
       REAL FMIXEFF
       REAL PROF(NL)
 
@@ -163,12 +162,12 @@ C-----------------------------------------------------------------------
       IF (INDEX('AFRDN',IFERI) .EQ. 0) THEN
         WRITE(MSG(1),300) IFERI
         WRITE(MSG(2),310) 
-        CALL WARNING(2, ERRKEY, MSG)
+        CALL WARNING(2,ERRKEY,MSG)
         ISWITCH % IFERI = 'N'
       ENDIF
 
-  300 FORMAT(
-     &    'Warning: The fertilizer option, "',A1,'" is not currently ')
+  300 FORMAT('Warning: The fertilizer option,"',A1,
+     &'" is not currently ')
   310 FORMAT('supported.  No fertilizer applications will be added.')
 
       FILEIO  = CONTROL % FILEIO
@@ -185,23 +184,23 @@ C-----------------------------------------------------------------------
       ENDIF
 
 !     Read FPLACE data from FILEIO.
-      OPEN (LUNIO, FILE = FILEIO, STATUS = 'OLD', IOSTAT = ERRNUM)
-      IF (ERRNUM .NE. 0) CALL ERROR (ERRKEY, ERRNUM, FILEIO, 0)
+      OPEN (LUNIO,FILE = FILEIO,STATUS = 'OLD',IOSTAT = ERRNUM)
+      IF (ERRNUM .NE. 0) CALL ERROR (ERRKEY,ERRNUM,FILEIO,0)
       LNUM = 0
 
 !     ------------------------------------------------------------------
 !     Find AUTOMATIC MANAGEMENT Section
 !     ------------------------------------------------------------------
       SECTION = '!AUTOM'
-      CALL FIND (LUNIO, SECTION, LINC, FOUND) ; LNUM = LNUM + LINC
+      CALL FIND (LUNIO,SECTION,LINC,FOUND) ; LNUM = LNUM+LINC
 
       IF (FOUND == 0) THEN
-        CALL ERROR (SECTION, 42, FILEIO, LNUM)
+        CALL ERROR (SECTION,42,FILEIO,LNUM)
       ELSE
-        READ (LUNIO,'(//,14X,3F6.0,4X,A2)',IOSTAT=ERRNUM) 
-     &        DSOILN,SOILNC,SOILNX, FERTYPEN
-        LNUM = LNUM + 3
-        IF (ERRNUM .NE. 0) CALL ERROR (ERRKEY, ERRNUM, FILEIO, LNUM)
+        READ (LUNIO,'(//,14X,3F6.0,4X,A2)',IOSTAT=ERRNUM)DSOILN,SOILNC,
+     &     SOILNX,FERTYPEN
+        LNUM = LNUM+3
+        IF (ERRNUM .NE. 0) CALL ERROR (ERRKEY,ERRNUM,FILEIO,LNUM)
         READ(FERTYPEN,'(I2)',IOSTAT=ERRNUM) FTYPEN
         IF (ERRNUM .NE. 0) FTYPEN = 1
       ENDIF
@@ -212,32 +211,32 @@ C-----------------------------------------------------------------------
 !     Find FERTILIZER Section
 !     ------------------------------------------------------------------
       SECTION = '*FERTI'
-      CALL FIND (LUNIO, SECTION, LINC, FOUND) ; LNUM = LNUM + LINC
+      CALL FIND (LUNIO,SECTION,LINC,FOUND) ; LNUM = LNUM+LINC
 
       IF (FOUND == 0) THEN
-        CALL ERROR (SECTION, 42, FILEIO, LNUM)
+        CALL ERROR (SECTION,42,FILEIO,LNUM)
       ELSE
         NFERT = 0
 
-        DO I = 1, NAPPL
-          READ (LUNIO, '(3X,I7,A90)', ERR = 90, END = 90) FDAY(I), CHAR
-          LNUM = LNUM + 1
-
+        DO I = 1,NAPPL
+          READ (LUNIO,'(3X,I7,A90)',ERR = 90,END = 90) FDAY(I),CHAR
+          LNUM = LNUM+1
+!         Keep logic of the simulater reading all data but overwrite it latter when needed
           READ(CHAR,'(1X,A5,1X,A5,4F6.0)',IOSTAT=ERRNUM) FERTYPE_CDE(I),
-     &      FERMET(I), FERDEP(I), ANFER(I), APFER(I), AKFER(I)
+     &       FERMET(I),FERDEP(I),ANFER(I),APFER(I),AKFER(I)
 
-          IF (ERRNUM .NE. 0) CALL ERROR(ERRKEY, ERRNUM, FILEIO, LNUM)
+          IF (ERRNUM .NE. 0) CALL ERROR(ERRKEY,ERRNUM,FILEIO,LNUM)
 
           READ(FERTYPE_CDE(I),'(2X,I3)') FERTYP(I)
           IF (FertFile(FerTyp(I)) % Check .EQ. 0) THEN
             MSG(1) = "Invalid fertilizer code specified."
-            WRITE(MSG(2),'(I7,A)') FDAY(I), CHAR(1:78)
+            WRITE(MSG(2),'(I7,A)') FDAY(I),CHAR(1:78)
             MSG(3) = "This fertilizer application will be ignored."
-            CALL WARNING(3, ERRKEY, MSG)
+            CALL WARNING(3,ERRKEY,MSG)
             CYCLE
           ENDIF
 !         The number of fertilizer applications to be done in this run.
-          NFERT = NFERT + 1
+          NFERT = NFERT+1
         ENDDO
    90   CONTINUE
       ENDIF
@@ -253,19 +252,19 @@ C-----------------------------------------------------------------------
 !-----------------------------------------------------------------------
       IF (MULTI > 1 .AND. NFERT > 0 .AND. IFERI .NE. 'D') THEN
 !       Open the FILEIO input file.
-        OPEN (LUNIO, FILE = FILEIO, STATUS = 'OLD', IOSTAT = ERRNUM)
-        IF (ERRNUM .NE. 0) CALL ERROR (ERRKEY, ERRNUM, FILEIO, 0)
+        OPEN (LUNIO,FILE = FILEIO,STATUS = 'OLD',IOSTAT = ERRNUM)
+        IF (ERRNUM .NE. 0) CALL ERROR (ERRKEY,ERRNUM,FILEIO,0)
 
         SECTION = '*FERTI'
-        CALL FIND (LUNIO, SECTION, LNUM, FOUND)
+        CALL FIND (LUNIO,SECTION,LNUM,FOUND)
 
 !       If the fertilizer section can't be found, call an error, or else
 !       read the input data.
         IF (FOUND == 0) THEN
-          CALL ERROR (SECTION, 42, FILEIO, LNUM)
+          CALL ERROR (SECTION,42,FILEIO,LNUM)
         ELSE
-          DO I = 1, NFERT
-            READ (LUNIO, '(3X, I7)', IOSTAT = ERRNUM, ERR = 5010,
+          DO I = 1,NFERT
+            READ (LUNIO,'(3X,I7)',IOSTAT = ERRNUM,ERR = 5010,
      &         END = 5010) FDAY(I)
           ENDDO
 5010      CONTINUE
@@ -275,9 +274,9 @@ C-----------------------------------------------------------------------
         CLOSE (LUNIO)
 
 !       Adjust dates for seasonal runs.
-        DO I = 1, NFERT
-          CALL YR_DOY (FDAY(I), YR, IDATE)
-          FDAY(I) = (YR + MULTI - 1) * 1000 + IDATE
+        DO I = 1,NFERT
+          CALL YR_DOY (FDAY(I),YR,IDATE)
+          FDAY(I) = (YR+MULTI-1) * 1000+IDATE
         ENDDO
       ENDIF
 
@@ -285,13 +284,12 @@ C-----------------------------------------------------------------------
 !     Adjust for crop rotations
 !-----------------------------------------------------------------------
       IF (RNMODE == 'Q') THEN
-        IF (NFERT > 0 .AND. FDAY(1) < YRSIM .AND. 
-     &          IFERI .NE. 'D') THEN
-          DO I = 1, NFERT
-            CALL YR_DOY (FDAY(I), YR, IDATE)
-            FDAY(I) = (YR + YRDIF) * 1000 + IDATE
+        IF (NFERT > 0 .AND. FDAY(1) < YRSIM .AND.IFERI .NE. 'D') THEN
+          DO I = 1,NFERT
+            CALL YR_DOY (FDAY(I),YR,IDATE)
+            FDAY(I) = (YR+YRDIF) * 1000+IDATE
           ENDDO
-        ENDIF   !End of IF block on NFERT, FDAY and IFERI
+        ENDIF   !End of IF block on NFERT,FDAY and IFERI
       ENDIF   !End of IF block on RNMODE
 
 !     ------------------------------------------------------------------
@@ -313,7 +311,7 @@ C-----------------------------------------------------------------------
       ADDSPi   = 0.0
       ADDSKi   = 0.0
 
-      DO I = 1, NSlowRelN     !max # that can be applied
+      DO I = 1,NSlowRelN     !max # that can be applied
         SlowRelN(I) % ACTIVE = .FALSE.
       ENDDO
       NSR = 0                 !actual # applied in this simulation
@@ -362,15 +360,37 @@ C-----------------------------------------------------------------------
         NIDATA % NIEND = YRDOY
       ENDIF
 
-      print * , 'NFERT val: ', NFERT
+      print * ,'NFERT val: ',NFERT
+
+!     We set NFERT to 1 when  IFERI = 'L' for RL application
+!     Modifying FertLoop's conditions for RL/NFERT is not needed 
+      IF (NFERT > 0 .AND. IFERI == 'L') THEN
+        NFERT=1
+      ENDIF
 
 
-
-      FertLoop: DO I = 1, NFERT
+      FertLoop: DO I = 1,NFERT
         FERTILIZE_TODAY = .FALSE.
-        print *, 'IFERI val: ', IFERI
+        print *,'IFERI val: ',IFERI
+        
+!       If no input from learner cycle
+        READ_RL_VALS=0
+        CALL PDI_expose("WAIT",READ_RL_VALS,PDI_IN)
+        IF(READ_RL_VALS.NE.0) THEN
+          ! List varibales to be read from python (real values)
+          ! FERDEP(1),ANFER(1),APFER(1),AKFER(1)
+          CALL PDI_expose("RL_FERT_VAL",RL_FERT_VAL,PDI_OUT)
+          FERDEP(1)=RL_FERT_VAL(1)
+          ANFER(1)=RL_FERT_VAL(2)
+          APFER(1)=RL_FERT_VAL(3)
+          AKFER(1)=RL_FERT_VAL(4)
+
+        ENDIF
+
+
 !       ------------------------------------------------------------------
 !       Fertilize on specified dates (YYDDD format)
+!       The following condition will be skipped with RL 
 !       ------------------------------------------------------------------
         IF (NFERT > 0 .AND. IFERI == 'R') THEN
 
@@ -379,26 +399,22 @@ C-----------------------------------------------------------------------
           ELSEIF (FDAY(I) .GT. YRDOY) THEN
             EXIT FertLoop
           ENDIF
-
-!       Essam: skip this section and NFERT to 1 -->
 !       ------------------------------------------------------------------
 !       Fertilize on specified days (DDD format)
 !       ------------------------------------------------------------------
 !        CALL PDI_expose("WAIT", WAIT, PDI_IN)
 
         ELSEIF (NFERT > 0 .AND. IFERI == 'D') THEN
-          DAP = MAX (0, TIMDIF(YRPLT, YRDOY))
-          IF ((FDAY(I) .NE. 0 .AND. DAP == FDAY(I)) .OR.
-     &      (FDAY(I) == 0 .AND. YRDOY == YRPLT)) THEN
+          DAP = MAX (0,TIMDIF(YRPLT,YRDOY))
+          IF ((FDAY(I) .NE. 0 .AND. DAP == FDAY(I)) .OR.(FDAY(I) == 0 .A
+     &       ND. YRDOY == YRPLT)) THEN
             FERTILIZE_TODAY = .TRUE.
           ELSEIF (FDAY(I) .GT. DAP) THEN
             EXIT FertLoop
           ENDIF
-!       Essam: modify the 'IFERT' Learning option
-        ELSEIF (NFERT > 0 .AND. IFERI == 'L') THEN
-
         ENDIF
 
+        
         IF (.NOT. FERTILIZE_TODAY) CYCLE
 
         FERDEPTH = FERDEP(I)
@@ -409,47 +425,47 @@ C       Convert character codes for fertilizer method into integer
 
 !       Go to FERTSECTION A of FERTILIZERTYPE to determine whether
 !       the fertilizer contains N and/or P.
-        CALL FERTILIZERTYPE (ISWITCH,
-     &    ANFER(I), APFER(I), AKFER(I), FERTYPE, FERTYPE_CDE(I), !Input
-     &    HASN, HASP, HASK, HASUI, HASNI, HASCR)                 !Output
+        CALL FERTILIZERTYPE (ISWITCH,ANFER(I),APFER(I),AKFER(I),FERTYPE,
+     &     FERTYPE_CDE(I),!InputHASN,HASP,HASK,HASUI,HASNI,
+     &     HASCR)                 !Output
 
         RUN_IT=1
-        CALL PDI_expose("RUN_SE", RUN_IT, PDI_IN)
+        CALL PDI_expose("RUN_SE",RUN_IT,PDI_IN)
 
-        CALL PDI_expose("HASN", HASN, PDI_OUT)
+        CALL PDI_expose("HASN",HASN,PDI_OUT)
 !        CALL PDI_expose("HASP", HASP, PDI_OUT)
 !        CALL PDI_expose("HASK", HASK, PDI_OUT)
 
         IF (HASN) THEN    !Do this only if NOT slow release
 !         Set the amount of N to be applied and sum total amount of
 !         N fertilizer
-          FERNIT    = FERNIT + ANFER(I)
+          FERNIT    = FERNIT+ANFER(I)
           FERNO3    = ANFER(I) * FertFile(FerType) % NO3_N_pct / 100.
           FERNH4    = ANFER(I) * FertFile(FerType) % NH4_N_pct / 100.
           FERUREA   = ANFER(I) * FertFile(FerType) % UREA_N_pct / 100.
-          AMTFER(N) = AMTFER(N) + ANFER(I)
-          NAPFER(N) = NAPFER(N) + 1
+          AMTFER(N) = AMTFER(N)+ANFER(I)
+          NAPFER(N) = NAPFER(N)+1
         ENDIF   !End of IF block on HASN.
 
 !       For now P and K are NOT slow release
         IF (HASP) THEN
 !         Set the amount of P to be applied and sum total amount of
 !         P fertilizer
-          FERPHOS   = FERPHOS + APFER(I)
-          AMTFER(P) = AMTFER(P) + APFER(I)
-          NAPFER(P) = NAPFER(P) + 1
+          FERPHOS   = FERPHOS+APFER(I)
+          AMTFER(P) = AMTFER(P)+APFER(I)
+          NAPFER(P) = NAPFER(P)+1
         ENDIF   !End of IF block on HASP.
 
         IF (HASK) THEN
 !         Set the amount of K to be applied and sum total amount of
 !         K fertilizer
-          FERPOT   = FERPOT + AKFER(I)
-          AMTFER(Kel) = AMTFER(Kel) + AKFER(I)
-          NAPFER(Kel) = NAPFER(Kel) + 1
+          FERPOT   = FERPOT+AKFER(I)
+          AMTFER(Kel) = AMTFER(Kel)+AKFER(I)
+          NAPFER(Kel) = NAPFER(Kel)+1
         ENDIF   !End of IF block on HASP.
 
         IF (HASCR) THEN
-          NSR = NSR + 1
+          NSR = NSR+1
           SlowRelN(NSR) % ACTIVE = .TRUE.
           SlowRelN(NSR) % CumRelYesterday = 0.0
           SlowRelN(NSR) % StartYRDOY = YRDOY
@@ -466,13 +482,13 @@ C       Convert character codes for fertilizer method into integer
           SlowRelN(NSR) % AN = SlowRelN(NSR) % NRL50 *SlowRelN(NSR)%KN
         ENDIF
 
-        IF (FERNIT > 1.E-3 .OR. FERPHOS > 1.E-3 .OR. FERPOT > 1.E-3)
-     &        THEN
+        IF (FERNIT > 1.E-3 .OR. FERPHOS > 1.E-3 .OR. FERPOT > 1.E-
+     &     3)THEN
           FERTDAY = YRDOY
 
-          CALL FertLayers(
-     &      DLAYR, FERDEPTH, FERTYPE, METFER, NLAYR,            !Input
-     &      AppType, FERMIXPERC, FMIXEFF, KMAX, PROF, UNINCO)   !Output
+          CALL FertLayers(DLAYR,FERDEPTH,FERTYPE,METFER,NLAYR,
+     &       !InputAppType,FERMIXPERC,FMIXEFF,KMAX,PROF,
+     &       UNINCO)   !Output
 
 !         Set soil distribution for slow release fertilizers 
           IF (HASCR) THEN
@@ -486,11 +502,10 @@ C       Convert character codes for fertilizer method into integer
             FERUREA = 0.0
           ENDIF
 
-          CALL FertApply(
-     &        FERNH4, FERNO3, FERUREA, FERPHOS, FERPOT,           !Input
-     &        FLOOD, FMIXEFF, PROF, KMAX,                         !Input
-     &        ADDFUREA, ADDFNH4, ADDFNO3, ADDOXU, ADDOXH4,        !I/O
-     &        ADDOXN3, ADDSNH4, ADDSNO3, ADDUREA, ADDSPi, ADDSKi) !I/O
+          CALL FertApply(FERNH4,FERNO3,FERUREA,FERPHOS,FERPOT,
+     &       !InputFLOOD,FMIXEFF,PROF,KMAX,!InputADDFUREA,ADDFNH4,
+     &       ADDFNO3,ADDOXU,ADDOXH4,!I/OADDOXN3,ADDSNH4,ADDSNO3,ADDUREA,
+     &       ADDSPi,ADDSKi) !I/O
           ENDIF
 
 !----------------------------------------------------------------------
@@ -501,7 +516,7 @@ C       Convert character codes for fertilizer method into integer
         IF (FertFile(FerType) % UIEFF .GT. 1.E-6) THEN
           UIData % UIEFF = FertFile(FerType) % UIEFF
           UIData % UIEND = INCDAT(YRDOY,NINT(FertFile(FerType)%UIDUR))
-          DO L = 1, NLAYR
+          DO L = 1,NLAYR
             IF (DS(L) .GT. FERDEPTH) THEN
               UIData % UILYR = L
               EXIT
@@ -513,7 +528,7 @@ C       Convert character codes for fertilizer method into integer
         IF (FertFile(FerType) % NIEFF .GT. 1.E-6) THEN
           NIData % NIEFF = FertFile(FerType) % NIEFF
           NIData % NIEND = INCDAT(YRDOY,NINT(FertFile(FerType)%NIDUR))
-          DO L = 1, NLAYR
+          DO L = 1,NLAYR
             IF (DS(L) .GT. FERDEPTH) THEN
               NIDATA % NILYR = L
               EXIT
@@ -527,7 +542,7 @@ C       Convert character codes for fertilizer method into integer
 
 !----------------------------------------------------------------------
 !     Look for slow release N today
-      DO I = 1, NSR
+      DO I = 1,NSR
         IF (.NOT. SlowRelN(I) % ACTIVE) CYCLE
 
         N0    = SlowRelN(I) % N0   
@@ -536,13 +551,13 @@ C       Convert character codes for fertilizer method into integer
         AN    = SlowRelN(I) % AN   
         CumRelYesterday = SlowRelN(I) % CumRelYesterday
 
-        IF (N0 - CumRelYesterday .LT. 0.001) THEN
+        IF (N0-CumRelYesterday .LT. 0.001) THEN
           SlowRelN(I) % ACTIVE = .FALSE.
           CYCLE
         ENDIF
 
-        TIME = TIMDIF(SlowRelN(I) % StartYRDOY, YRDOY)
-        CumRelToday = N0 / (1.0 + EXP(AN - KN * TIME))
+        TIME = TIMDIF(SlowRelN(I) % StartYRDOY,YRDOY)
+        CumRelToday = N0 / (1.0+EXP(AN-KN * TIME))
 
 !       Account for low K values with (relatively) long duration.
 !       The sigmoidal curve starts before time zero in this case. 
@@ -552,8 +567,8 @@ C       Convert character codes for fertilizer method into integer
           IF (TIME .EQ. 0.0) THEN
             CumRelToday = 0.0
           ELSEIF (TIME .LE. TLinear) THEN
-            Y = TIME / Tlinear * N0 / (1.0 + EXP(AN - KN * Tlinear))
-            CumRelToday = MIN(Y, CumRelToday)
+            Y = TIME / Tlinear * N0 / (1.0+EXP(AN-KN * Tlinear))
+            CumRelToday = MIN(Y,CumRelToday)
           ENDIF
         ENDIF
 
@@ -562,7 +577,7 @@ C       Convert character codes for fertilizer method into integer
           CumRelToday = N0
         ENDIF
 
-        AmtRelToday = CumRelToday - CumRelYesterday
+        AmtRelToday = CumRelToday-CumRelYesterday
 
         FERNO3   = AmtRelToday * SlowRelN(I) % NO3_frac
         FERNH4   = AmtRelToday * SlowRelN(I) % NH4_frac
@@ -575,11 +590,10 @@ C       Convert character codes for fertilizer method into integer
         SlowRelN(I) % CumRelToday = CumRelToday
         SlowRelN(I) % CumRelYesterday = CumRelToday  !Save for tomorrow
 
-        CALL FertApply(
-     &    FERNH4, FERNO3, FERUREA, FERPHOS, FERPOT,           !Input
-     &    FLOOD, FMIXEFF, PROF, KMAX,                         !Input
-     &    ADDFUREA, ADDFNH4, ADDFNO3, ADDOXU, ADDOXH4,        !I/O
-     &    ADDOXN3, ADDSNH4, ADDSNO3, ADDUREA, ADDSPi, ADDSKi) !I/O
+        CALL FertApply(FERNH4,FERNO3,FERUREA,FERPHOS,FERPOT,!InputFLOOD,
+     &     FMIXEFF,PROF,KMAX,!InputADDFUREA,ADDFNH4,ADDFNO3,ADDOXU,
+     &     ADDOXH4,!I/OADDOXN3,ADDSNH4,ADDSNO3,ADDUREA,ADDSPi,
+     &     ADDSKi) !I/O
       ENDDO
 
 !!     ------------------------------------------------------------------
@@ -659,8 +673,8 @@ C-----------------------------------------------------------------------
       FertData % FERMIXPERC = FERMIXPERC
 
       NActiveSR = 0
-      DO I = 1, NSlowRelN
-        IF (SlowRelN(I) % ACTIVE) NActiveSR = NActiveSR + 1
+      DO I = 1,NSlowRelN
+        IF (SlowRelN(I) % ACTIVE) NActiveSR = NActiveSR+1
       ENDDO
 
 !     Transfer data to ModuleData
@@ -687,30 +701,29 @@ C  03/17/2005 CHP pulled N fertilizer distribution from FPLACE
 !     This is to facilitate slow release fertilizers that will add
 !     a little bit every day to exactly the same layers. 
 C=======================================================================
-      SUBROUTINE FertLayers(
-     &    DLAYR, FERDEPTH, FERTYPE, METFER, NLAYR,            !Input
-     &    AppType, FERMIXPERC, FMIXEFF, KMAX, PROF, UNINCO)   !Output
+      SUBROUTINE FertLayers(DLAYR,FERDEPTH,FERTYPE,METFER,NLAYR,
+     &   !InputAppType,FERMIXPERC,FMIXEFF,KMAX,PROF,UNINCO)   !Output
 
 !-----------------------------------------------------------------------
-      USE ModuleDefs
-      USE FloodModule
+      USE moduleDefs
+      USE Floodmodule
       IMPLICIT NONE
       SAVE
 
 !     ------------------------------------------------------------------
       CHARACTER*78 MSG(10)
-      CHARACTER*6, PARAMETER :: ERRKEY = 'FPLACE'
+      CHARACTER*6,parameter :: ERRKEY = 'FPLACE'
       CHARACTER*7  AppType
 
-      INTEGER FERTYPE, I, IDLAYR, KMAX, L, NLAYR
+      integer FERTYPE,I,IDLAYR,KMAX,L,NLAYR
 
-      REAL CUMDEP, FERDEPTH
-      REAL FMIXEFF, FERMIXPERC
+      REAL CUMDEP,FERDEPTH
+      REAL FMIXEFF,FERMIXPERC
 
-      REAL DLAYR(NL), PROF(NL)
+      REAL DLAYR(NL),PROF(NL)
 
       LOGICAL UNINCO
-      INTEGER KD, METFER
+      integer KD,METFER
       REAL FME(10)    !Fertilizer mixing efficiency
 
 !-----------------------------------------------------------------------
@@ -739,7 +752,7 @@ C=======================================================================
 C           MIXING EFFICIENCY BASED ON BURESH ET AL.
 !                1     2     3     4     5     6     7     8     9   10   
 !       METFER  11    12    13    14    15    16    17    18    19   20
-      DATA FME/0.0, 0.15, 0.30, 0.45, 0.60, 0.75, 0.90, 0.92, 0.95, 1.0/
+      DATA FME/0.0,0.15,0.30,0.45,0.60,0.75,0.90,0.92,0.95,1.0/
 
 C     Uses mixing efficiency (FME) input to determine where fertilizer goes.
 C     If mixing efficiency is zero all fertilizer is in floodwater 
@@ -757,9 +770,9 @@ C     Need to make provision for USG as a source
 
 !       Set fertilizer mixing efficiency based on method of fert.
       SELECT CASE (METFER)
-        CASE (1, 3);  FMIXEFF = FME(1)           !0% incorporation
-        CASE (2, 4:9);FMIXEFF = FME(10)          !100% incorporated
-        CASE (11:20); FMIXEFF = FME(METFER - 10) !Range from 0 to 1
+        CASE (1,3);  FMIXEFF = FME(1)           !0% incorporation
+        CASE (2,4:9);FMIXEFF = FME(10)          !100% incorporated
+        CASE (11:20); FMIXEFF = FME(METFER-10) !Range from 0 to 1
         CASE DEFAULT; FMIXEFF = FME(10)          !Default 100% inc.
       END SELECT
 
@@ -788,10 +801,10 @@ C     Need to make provision for USG as a source
             CUMDEP = DLAYR(1)
             PROF(1)   = DLAYR(1) / FERDEPTH
 
-            DO L = 2, KMAX
-              CUMDEP = CUMDEP + DLAYR(L)
+            DO L = 2,KMAX
+              CUMDEP = CUMDEP+DLAYR(L)
               IF (FERDEPTH <= CUMDEP) THEN
-                PROF(L) = (FERDEPTH - (CUMDEP - DLAYR(L))) / FERDEPTH
+                PROF(L) = (FERDEPTH-(CUMDEP-DLAYR(L))) / FERDEPTH
               ELSE
                 PROF(L) = DLAYR(L) / FERDEPTH
               ENDIF
@@ -803,15 +816,15 @@ C     Need to make provision for USG as a source
 !       All fertilizer placed in layer KD with (PROF = 1.0)
           KD = IDLAYR (NLAYR,DLAYR,FERDEPTH)
           IF (KD == 1) THEN
-            WRITE (MSG(1),1000) FERTYPE,  FERDEPTH
+            WRITE (MSG(1),1000) FERTYPE,FERDEPTH
             WRITE (MSG(2),1001)
             WRITE (MSG(3),1002)
- 1000       FORMAT('Fertilizer type ',I3,'; Depth ', F5.2)
+ 1000       FORMAT('Fertilizer type ',I3,'; Depth ',F5.2)
  1001       FORMAT('Deep placement of fertilizer could not ',
-     &          'be accomodated.')
+     &'be accomodated.')
  1002       FORMAT('Model is forcing deep placement into ',
-     &          'second layer.')
-            CALL WARNING(3, ERRKEY, MSG)
+     &'second layer.')
+            CALL WARNING(3,ERRKEY,MSG)
             KD = 2
           ENDIF
           PROF(KD) = 1.0
@@ -820,12 +833,12 @@ C     Need to make provision for USG as a source
         CASE DEFAULT
           MSG(1) = "Application method not currently active in CSM."
           MSG(2) = "No fertilizer added."
-          WRITE(MSG(3),'(A,I3)') "Method: ", METFER
+          WRITE(MSG(3),'(A,I3)') "Method: ",METFER
           CALL WARNING(3,ERRKEY,MSG)
       END SELECT
 
       IF (KMAX > 1 .AND. FMIXEFF < 0.95) THEN
-        DO I = 1, KMAX
+        DO I = 1,KMAX
           SELECT CASE (I)
             CASE (1)
               IF (PROF(I)*1.2 < 1.0) THEN
@@ -833,12 +846,12 @@ C     Need to make provision for USG as a source
               ENDIF
 
             CASE (2)
-              PROF(I)   = 1.0 - PROF(I-1)
+              PROF(I)   = 1.0-PROF(I-1)
 
             CASE (3)
-              PROF(I)   = PROF(I-1) - PROF(I)
+              PROF(I)   = PROF(I-1)-PROF(I)
               PROF(I)   = AMAX1 (PROF(I),0.0)
-              PROF(I-1) = PROF(I-1) - PROF(I)
+              PROF(I-1) = PROF(I-1)-PROF(I)
 
             CASE DEFAULT
               PROF(I)   = 0.0
@@ -877,55 +890,54 @@ C  Revision history
 C
 C  03/17/2005 CHP pulled N fertilizer distribution from FPLACE 
 C=======================================================================
-      SUBROUTINE FertApply(
-     &    FERNH4, FERNO3, FERUREA, FERPHOS, FERPOT,           !Input
-     &    FLOOD, FMIXEFF, PROF, KMAX,                         !Input
-     &    ADDFUREA, ADDFNH4, ADDFNO3, ADDOXU, ADDOXH4,        !I/O
-     &    ADDOXN3, ADDSNH4, ADDSNO3, ADDUREA, ADDSPi, ADDSKi) !I/O
+      SUBROUTINE FertApply(FERNH4,FERNO3,FERUREA,FERPHOS,FERPOT,
+     &   !InputFLOOD,FMIXEFF,PROF,KMAX,!InputADDFUREA,ADDFNH4,ADDFNO3,
+     &   ADDOXU,ADDOXH4,!I/OADDOXN3,ADDSNH4,ADDSNO3,ADDUREA,ADDSPi,
+     &   ADDSKi) !I/O
 
 !-----------------------------------------------------------------------
-      USE ModuleDefs
-      USE FloodModule
+      USE moduleDefs
+      USE Floodmodule
       IMPLICIT NONE
       SAVE
 
-      CHARACTER*6, PARAMETER :: ERRKEY = 'FPLACE'
-      INTEGER K, KMAX
+      CHARACTER*6,parameter :: ERRKEY = 'FPLACE'
+      integer K,KMAX
 
-      REAL FERNO3, FERNH4, FERUREA
-      REAL FERPHOS, FERPOT
+      REAL FERNO3,FERNH4,FERUREA
+      REAL FERPHOS,FERPOT
       REAL FMIXEFF
 
-      REAL ADDSNH4(NL), ADDSPi(NL), ADDSKi(NL)
-      REAL ADDSNO3(NL), ADDUREA(NL), PROF(NL)
+      REAL ADDSNH4(NL),ADDSPi(NL),ADDSKi(NL)
+      REAL ADDSNO3(NL),ADDUREA(NL),PROF(NL)
 
-      REAL ADDFUREA, ADDFNO3, ADDFNH4
-      REAL FLOOD, ADDOXU, ADDOXH4, ADDOXN3
+      REAL ADDFUREA,ADDFNO3,ADDFNH4
+      REAL FLOOD,ADDOXU,ADDOXH4,ADDOXN3
 
 !       Add the fertilizer to the appropriate layer. 
-        ADDFNO3   = ADDFNO3   + FERNO3  * (1.0 - FMIXEFF)
-        ADDFNH4   = ADDFNH4   + FERNH4  * (1.0 - FMIXEFF)
-        ADDFUREA  = ADDFUREA  + FERUREA * (1.0 - FMIXEFF)
-        ADDSPi(1) = ADDSPi(1) + FERPHOS * (1.0 - FMIXEFF)
-        ADDSKi(1) = ADDSKi(1) + FERPOT  * (1.0 - FMIXEFF)
-        DO K = 1, KMAX
-          ADDSNO3(K) = ADDSNO3(K) + FERNO3  * FMIXEFF * PROF(K)
-          ADDSNH4(K) = ADDSNH4(K) + FERNH4  * FMIXEFF * PROF(K)
-          ADDUREA(K) = ADDUREA(K) + FERUREA * FMIXEFF * PROF(K)
-          ADDSPi(K)  = ADDSPi(K)  + FERPHOS * FMIXEFF * PROF(K)
-          ADDSKi(K)  = ADDSKi(K)  + FERPOT  * FMIXEFF * PROF(K)
+        ADDFNO3   = ADDFNO3+FERNO3  * (1.0-FMIXEFF)
+        ADDFNH4   = ADDFNH4+FERNH4  * (1.0-FMIXEFF)
+        ADDFUREA  = ADDFUREA+FERUREA * (1.0-FMIXEFF)
+        ADDSPi(1) = ADDSPi(1)+FERPHOS * (1.0-FMIXEFF)
+        ADDSKi(1) = ADDSKi(1)+FERPOT  * (1.0-FMIXEFF)
+        DO K = 1,KMAX
+          ADDSNO3(K) = ADDSNO3(K)+FERNO3  * FMIXEFF * PROF(K)
+          ADDSNH4(K) = ADDSNH4(K)+FERNH4  * FMIXEFF * PROF(K)
+          ADDUREA(K) = ADDUREA(K)+FERUREA * FMIXEFF * PROF(K)
+          ADDSPi(K)  = ADDSPi(K)+FERPHOS * FMIXEFF * PROF(K)
+          ADDSKi(K)  = ADDSKi(K)+FERPOT  * FMIXEFF * PROF(K)
         END DO
 
 !     -----------------------------------------------------
 !       If no flood, N goes to oxidation layer and top soil layer
         IF (ABS(FLOOD) < 1.E-4) THEN
-          ADDOXU  = ADDOXU  + ADDFUREA
-          ADDOXH4 = ADDOXH4 + ADDFNH4
-          ADDOXN3 = ADDOXN3 + ADDFNO3
+          ADDOXU  = ADDOXU+ADDFUREA
+          ADDOXH4 = ADDOXH4+ADDFNH4
+          ADDOXN3 = ADDOXN3+ADDFNO3
 
-          ADDUREA(1) = ADDUREA(1) + ADDFUREA
-          ADDSNH4(1) = ADDSNH4(1) + ADDFNH4
-          ADDSNO3(1) = ADDSNO3(1) + ADDFNO3
+          ADDUREA(1) = ADDUREA(1)+ADDFUREA
+          ADDSNH4(1) = ADDSNH4(1)+ADDFNH4
+          ADDSNO3(1) = ADDSNO3(1)+ADDFNO3
           ADDFUREA= 0.0
           ADDFNH4 = 0.0
           ADDFNO3 = 0.0
@@ -961,18 +973,18 @@ C  FDEPTH : Fertilizer depth (cm)
 C  DEPTH  : Depth to the bottom of a layer from the surface (cm)
 C=======================================================================
 
-      INTEGER FUNCTION IDLAYR (NLAYR,DLAYR,FDEPTH)
+      integer FUNCTION IDLAYR (NLAYR,DLAYR,FDEPTH)
 
       IMPLICIT  NONE
 
-      INTEGER   NLAYR,L
+      integer   NLAYR,L
       DIMENSION DLAYR (NLAYR)
       REAL      FDEPTH,DLAYR,DEPTH
 
       DEPTH  = 0.0
       IDLAYR = 1
-      DO L = 1, NLAYR
-         DEPTH  = DEPTH + DLAYR (L)
+      DO L = 1,NLAYR
+         DEPTH  = DEPTH+DLAYR (L)
          IF (FDEPTH <= DEPTH) THEN
             IDLAYR = L
             GO TO 10
