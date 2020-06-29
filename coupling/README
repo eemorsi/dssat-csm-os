@@ -37,7 +37,7 @@ Run flowvr daemon on your system (best in new terminal, repeat 1. and 2.): flowv
 python CSM.py
 flowvr csm
 
-
+Hint: PDI annotation ignored if you pass an empty YML file to your system
 --------------------------
 
 How Fert_Place.for works?
