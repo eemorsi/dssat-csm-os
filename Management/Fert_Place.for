@@ -426,7 +426,7 @@ C       Convert character codes for fertilizer method into integer
         RUN_IT=1
         CALL PDI_expose("RUN_SE", RUN_IT, PDI_IN)
 
-        PRINT *, 'Before the HASH expose !!'
+        PRINT *, 'Before the HASH expose !!', RUN_IT
         CALL PDI_expose("HASN", HASN, PDI_OUT)
 !        CALL PDI_expose("HASP", HASP, PDI_OUT)
 !        CALL PDI_expose("HASK", HASK, PDI_OUT)

@@ -253,7 +253,7 @@ C     Initialize PDI/FlowVR for data expose
 C-----------------------------------------------------------------------
 !     Pass the conf / parse it ?!
 !     update the path of the yml file to be an argument passed to the program
-      CALL PC_parse_path("put.yml", conf)
+      CALL PC_parse_path("env.yml", conf)
       CALL PDI_init(PC_get(conf, ".pdi"))
 
 !     initiate main loop reading of the learner ...
