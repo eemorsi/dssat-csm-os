@@ -17,11 +17,16 @@ if __name__ == '__main__':
     pdi.init(yaml.dump(config['pdi']))
     RUN = np.array(0) # read signal from the CSM app to start reading values 
     HASN = np.array(0)
-    pdi.expose('RUN_SE', RUN , pdi.IN)
+    pdi.share('RUN_SE', RUN , pdi.IN)
     
     while(RUN != 0):
-        pdi.expose("HASN", HASN, pdi.IN)
+        print("Python: from the while loop")
+        RUN=0
+        pdi.reclaim('RUN_SE')
+
+        pdi.share('HASN', HASN, pdi.IN)
         print("HASN: {}".format(HASN))
+        pdi.reclaim('HASN')
         
         pdi.expose('RUN_SE', RUN , pdi.IN)
         

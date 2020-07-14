@@ -370,26 +370,24 @@ C-----------------------------------------------------------------------
 
       IF (NFERT > 0 .AND. IFERI == 'L') THEN
         NFERT = 1
-        
-        RUN_IT=1
-        CALL PDI_expose("RUN_SE", RUN_IT, PDI_IN)
       ENDIF
 
+      
       FertLoop: DO I = 1, NFERT
         FERTILIZE_TODAY = .FALSE.
         print *, 'IFERI val: ', IFERI
-!       ------------------------------------------------------------------
-!       Fertilize on specified dates (YYDDD format)
+        
+! !       ------------------------------------------------------------------
+! !       Fertilize on specified dates (YYDDD format)
 !       ------------------------------------------------------------------
         IF (NFERT > 0 .AND. IFERI == 'R') THEN
 
           IF (YRDOY == FDAY(I)) THEN
-            FERTILIZE_TODAY = .TRUE.
+              FERTILIZE_TODAY = .TRUE.
           ELSEIF (FDAY(I) .GT. YRDOY) THEN
             EXIT FertLoop
           ENDIF
 
-!       Essam: skip this section and NFERT to 1 -->
 !       ------------------------------------------------------------------
 !       Fertilize on specified days (DDD format)
 !       ------------------------------------------------------------------
@@ -403,9 +401,12 @@ C-----------------------------------------------------------------------
           ELSEIF (FDAY(I) .GT. DAP) THEN
             EXIT FertLoop
           ENDIF
-!       Essam: modify the 'IFERT' Learning option
-        ! ELSEIF (NFERT > 0 .AND. IFERI == 'L') THEN
 
+!       ------------------------------------------------------------------
+!       In the learning mode; set today as a fert day
+!       ------------------------------------------------------------------
+        ELSEIF (NFERT > 0 .AND. IFERI == 'L') THEN
+          FERTILIZE_TODAY = .TRUE.
         ENDIF
 
         IF (.NOT. FERTILIZE_TODAY) CYCLE
@@ -422,8 +423,10 @@ C       Convert character codes for fertilizer method into integer
      &    ANFER(I), APFER(I), AKFER(I), FERTYPE, FERTYPE_CDE(I), !Input
      &    HASN, HASP, HASK, HASUI, HASNI, HASCR)                 !Output
 
-        
+        RUN_IT=1
+        CALL PDI_expose("RUN_SE", RUN_IT, PDI_IN)
 
+        PRINT *, 'Before the HASH expose !!'
         CALL PDI_expose("HASN", HASN, PDI_OUT)
 !        CALL PDI_expose("HASP", HASP, PDI_OUT)
 !        CALL PDI_expose("HASK", HASK, PDI_OUT)

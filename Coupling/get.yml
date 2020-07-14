@@ -1,6 +1,6 @@
 pdi:
-  logging:
-    level: debug
+  # logging:
+  #   level: debug
 
   data:
     RUN_SE: int
