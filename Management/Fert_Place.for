@@ -85,6 +85,7 @@ C=======================================================================
      &  DLAYR(NL), DS(NL), ADDSNH4(NL), ADDSPi(NL), ADDSKi(NL),
      &  ADDSNO3(NL), ADDUREA(NL), FERDEP(NAPPL)
 
+      REAL,DIMENSION(4) :: RL_FERT_VAL
       TYPE (ControlType) CONTROL
       TYPE (SwitchType)  ISWITCH
       TYPE (FertType)    FertData
@@ -222,7 +223,7 @@ C-----------------------------------------------------------------------
         DO I = 1, NAPPL
           READ (LUNIO, '(3X,I7,A90)', ERR = 90, END = 90) FDAY(I), CHAR
           LNUM = LNUM + 1
-
+!         Keep logic of the simulater reading all data but overwrite it latter when needed
           READ(CHAR,'(1X,A5,1X,A5,4F6.0)',IOSTAT=ERRNUM) FERTYPE_CDE(I),
      &      FERMET(I), FERDEP(I), ANFER(I), APFER(I), AKFER(I)
 
@@ -367,18 +368,37 @@ C-----------------------------------------------------------------------
 
 
       
-
+!       ------------------------------------------------------------------
+!       Change NFERT into if it is running in the learning mode
+!       ------------------------------------------------------------------
       IF (NFERT > 0 .AND. IFERI == 'L') THEN
         NFERT = 1
       ENDIF
 
-      
       FertLoop: DO I = 1, NFERT
         FERTILIZE_TODAY = .FALSE.
         print *, 'IFERI val: ', IFERI
-        
-! !       ------------------------------------------------------------------
-! !       Fertilize on specified dates (YYDDD format)
+!       ------------------------------------------------------------------
+!       Notify the learner to exchange data
+!       ------------------------------------------------------------------
+        RUN_IT=1
+        CALL PDI_expose("RUN_SE", RUN_IT, PDI_IN)
+!       ------------------------------------------------------------------
+!       Read some data from the learner to be feed into the fertilization process
+!       ------------------------------------------------------------------      
+	      CALL PDI_expose("RL_FERT_VAL",RL_FERT_VAL,PDI_IN)
+        FERDEP(1)=RL_FERT_VAL(1)
+        ANFER(1)=RL_FERT_VAL(2)
+        APFER(1)=RL_FERT_VAL(3)
+        AKFER(1)=RL_FERT_VAL(4)
+
+        PRINT *, ' AKFER(1): ', AKFER(1)
+
+
+
+!       ------------------------------------------------------------------
+!       Fertilize on specified dates (YYDDD format)
+!       The following condition will be skipped with RL 
 !       ------------------------------------------------------------------
         IF (NFERT > 0 .AND. IFERI == 'R') THEN
 
@@ -423,8 +443,7 @@ C       Convert character codes for fertilizer method into integer
      &    ANFER(I), APFER(I), AKFER(I), FERTYPE, FERTYPE_CDE(I), !Input
      &    HASN, HASP, HASK, HASUI, HASNI, HASCR)                 !Output
 
-        RUN_IT=1
-        CALL PDI_expose("RUN_SE", RUN_IT, PDI_IN)
+        
 
         PRINT *, 'Before the HASH expose !!', RUN_IT
         CALL PDI_expose("HASN", HASN, PDI_OUT)
