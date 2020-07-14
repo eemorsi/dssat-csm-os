@@ -115,7 +115,7 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                 )
 	#find_package(PDI COMPONENTS f90)
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
-                 Fortran "-I/usr/local/lib/gcc/x86_64-linux-gnu/9/finclude/ -I/usr/local/lib/pdi/finclude/GNU-9.3/"
+                 Fortran "${CMAKE_PDI_INCLUDE}"
                 )
 
 ####################
@@ -142,12 +142,12 @@ ELSE ()
 	#                         Fortran "-static-libgfortran"  # GNU
 	#                        )
     SET_COMPILE_FLAG(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}"
-	    	    Fortran "-I/usr/local/lib/gcc/x86_64-linux-gnu/9/finclude/ -I/usr/local/lib/pdi/finclude/GNU-9.3/"
+	    	    Fortran "${CMAKE_PDI_INCLUDE}"
 		    )
 	    #    SET_COMPILE_FLAG(CMAKE_Fortran_LINK_EXECUTABLE "${CMAKE_Fortran_LINK_EXECUTABLE}"
-	    #	    Fortran "${CMAKE_EXE_LINKER_FLAGS} <OBJECTS> -o <TARGET> <LINK_LIBRARIES>     -L/usr/local/lib -lpdi_f90 -lpdi -lparaconf_f90 -lparaconf -lyaml"
+	    #	    Fortran "${CMAKE_EXE_LINKER_FLAGS} <OBJECTS> -o <TARGET> <LINK_LIBRARIES>     -L${CMAKE_PDI_LIB} -lpdi_f90 -lpdi -lparaconf_f90 -lparaconf -lyaml"
 	    #	    )
-    set(CMAKE_Fortran_LINK_EXECUTABLE "f95 ${CMAKE_EXE_LINKER_FLAGS} <OBJECTS> -o <TARGET> <LINK_LIBRARIES> -L/usr/local/lib -lpdi_f90 -lpdi -lparaconf_f90 -lparaconf -lyaml")
+    set(CMAKE_Fortran_LINK_EXECUTABLE "f95 ${CMAKE_EXE_LINKER_FLAGS} <OBJECTS> -o <TARGET> <LINK_LIBRARIES> -L${CMAKE_PDI_LIB} -lpdi_f90 -lpdi -lparaconf_f90 -lparaconf -lyaml")
 
 	# find_package(PDI COMPONENTS f90)
 	# target_include_directories(<TARGET> "-I/usr/local/lib/gcc/x86_64-linux-gnu/9/finclude/ -I/usr/local/lib/pdi/finclude/GNU-9.3/")

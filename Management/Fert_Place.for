@@ -160,7 +160,7 @@ C=======================================================================
 C-----------------------------------------------------------------------
 !     Check for invalid fertilizer option.
 !     CHP 10/14/2008 Added "F" option
-      IF (INDEX('AFRDN',IFERI) .EQ. 0) THEN
+      IF (INDEX('AFRDNL',IFERI) .EQ. 0) THEN
         WRITE(MSG(1),300) IFERI
         WRITE(MSG(2),310) 
         CALL WARNING(2, ERRKEY, MSG)
@@ -366,6 +366,15 @@ C-----------------------------------------------------------------------
 
 
 
+      
+
+      IF (NFERT > 0 .AND. IFERI == 'L') THEN
+        NFERT = 1
+        
+        RUN_IT=1
+        CALL PDI_expose("RUN_SE", RUN_IT, PDI_IN)
+      ENDIF
+
       FertLoop: DO I = 1, NFERT
         FERTILIZE_TODAY = .FALSE.
         print *, 'IFERI val: ', IFERI
@@ -395,7 +404,7 @@ C-----------------------------------------------------------------------
             EXIT FertLoop
           ENDIF
 !       Essam: modify the 'IFERT' Learning option
-        ELSEIF (NFERT > 0 .AND. IFERI == 'L') THEN
+        ! ELSEIF (NFERT > 0 .AND. IFERI == 'L') THEN
 
         ENDIF
 
@@ -413,8 +422,7 @@ C       Convert character codes for fertilizer method into integer
      &    ANFER(I), APFER(I), AKFER(I), FERTYPE, FERTYPE_CDE(I), !Input
      &    HASN, HASP, HASK, HASUI, HASNI, HASCR)                 !Output
 
-        RUN_IT=1
-        CALL PDI_expose("RUN_SE", RUN_IT, PDI_IN)
+        
 
         CALL PDI_expose("HASN", HASN, PDI_OUT)
 !        CALL PDI_expose("HASP", HASP, PDI_OUT)
