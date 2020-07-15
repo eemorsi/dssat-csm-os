@@ -15,7 +15,7 @@ pdi:
       input_ports:
         text:  
           data: HASN
-      output_ports:
-        rlval:
-          data: RL_FERT_VAL
+      # output_ports:
+      #   rlval:
+      #     data: RL_FERT_VAL
           
