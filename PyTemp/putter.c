@@ -1,4 +1,5 @@
 /**
+ * Compilation command 
  * gcc -O2 putter.c -o cputter -lpdi -lparaconf
  * */
 
