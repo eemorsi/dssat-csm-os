@@ -18,6 +18,7 @@ int main(int argc, char const *argv[])
     PDI_expose("RUN_SE", &RUN, PDI_IN);
     while (RUN)
     {
+        
         PDI_expose("RL_FERT_VAL", SIM_FERT_VAL, PDI_IN);
         printf("RL_FERT_VAL[0]: %f\n", SIM_FERT_VAL[0]);
 
