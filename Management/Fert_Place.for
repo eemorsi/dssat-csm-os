@@ -386,11 +386,11 @@ C-----------------------------------------------------------------------
 !       ------------------------------------------------------------------
 !       Read some data from the learner to be feed into the fertilization process
 !       ------------------------------------------------------------------      
-	      CALL PDI_expose("RL_FERT_VAL",RL_FERT_VAL,PDI_IN)
-        FERDEP(1)=RL_FERT_VAL(1)
-        ANFER(1)=RL_FERT_VAL(2)
-        APFER(1)=RL_FERT_VAL(3)
-        AKFER(1)=RL_FERT_VAL(4)
+	      ! CALL PDI_expose("RL_FERT_VAL",RL_FERT_VAL,PDI_IN)
+        ! FERDEP(1)=RL_FERT_VAL(1)
+        ! ANFER(1)=RL_FERT_VAL(2)
+        ! APFER(1)=RL_FERT_VAL(3)
+        ! AKFER(1)=RL_FERT_VAL(4)
 
         PRINT *, ' AKFER(1): ', AKFER(1)
 
