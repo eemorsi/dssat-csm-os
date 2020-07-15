@@ -28,7 +28,7 @@ if __name__ == '__main__':
         # pdi.reclaim('RUN_SE')
         # SIM_FERT_VAL.fill(0.1 * CNT)
         # pass fertilization data to the simulator
-        # pdi.expose("RL_FERT_VAL", SIM_FERT_VAL, pdi.OUT)
+        pdi.expose("RL_FERT_VAL", SIM_FERT_VAL, pdi.OUT)
 
         pdi.expose("HASN", HASN, pdi.IN)
         print("PY HASN: {}".format(HASN))
