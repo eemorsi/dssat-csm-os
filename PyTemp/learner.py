@@ -26,7 +26,7 @@ if __name__ == '__main__':
         print("Python: from the while loop")
         # RUN=0
         # pdi.reclaim('RUN_SE')
-        SIM_FERT_VAL[:]= 1
+        SIM_FERT_VAL[:]= 0.1 * CNT
         # pass fertilization data to the simulator
         pdi.expose("RL_FERT_VAL", SIM_FERT_VAL, pdi.OUT)
 
