@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
     SIM_FERT_VAL = np.zeros(4, dtype=float, order='F')
 
-    CNT = 0
+    CNT = 1
     while(RUN != 0):
         print("Python: from the while loop")
         # RUN=0

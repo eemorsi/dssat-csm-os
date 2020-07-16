@@ -12,6 +12,7 @@ pdi:
     flowvr:
       component: module
       wait_on_data: RUN_SE
+      abort_on_finalize: true
       input_ports:
         text:  
           data: HASN
