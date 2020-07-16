@@ -8,7 +8,7 @@ rlmodule = Module_PDI("learner", cmdline = "python learner.py", pdi_conf = "lear
 # envmodule.getPort("text").link(rlmodule.getPort("text"))
 
 # Connection from gldens to fluid simulation
-pres = FilterPreSignal( "Pos_PreSignal", messagetype = 'full' )
+pres = FilterPreSignal( "se_presignal", messagetype = 'full' )
 envmodule.getPort("text").link(pres.getPort("in"))
 pres.getPort("out").link(rlmodule.getPort("text"))
 
