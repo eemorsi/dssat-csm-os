@@ -5,7 +5,7 @@ pdi:
   data:
     RUN_SE: int
     HASN: int
-    RL_FERT_VAL: {type: array, subtype: float, size: 4}
+    RL_FERT_VAL: float #{type: array, subtype: float, size: 4}
 
 
   plugins:
