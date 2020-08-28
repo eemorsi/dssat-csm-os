@@ -17,18 +17,18 @@ if __name__ == '__main__':
     pdi.init(yaml.dump(config["pdi"]))
     RUN = np.array(0)  # read signal from the CSM app to start reading values
     HASN = np.array(0)
+    
     pdi.expose("RUN_SE", RUN, pdi.IN)
 
-    SIM_FERT_VAL = np.array(4, dtype=float)
+    SIM_FERT_VAL = np.zeros(4, dtype=float, order='F') #np.array(0, dtype=float)#np.zeros(4, dtype=float, order='F')
 
-    CNT = 0
+    CNT = 1
     while(RUN != 0):
         print("Python: from the while loop")
-        # RUN=0
-        # pdi.reclaim('RUN_SE')
-        # SIM_FERT_VAL.fill(0.1 * CNT)
+      
+        SIM_FERT_VAL[:]= 0.1 * CNT
         # pass fertilization data to the simulator
-        # pdi.expose("RL_FERT_VAL", SIM_FERT_VAL, pdi.OUT)
+        pdi.expose("RL_FERT_VAL", SIM_FERT_VAL, pdi.OUT)
 
         pdi.expose("HASN", HASN, pdi.IN)
         print("PY HASN: {}".format(HASN))

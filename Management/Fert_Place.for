@@ -74,7 +74,7 @@ C=======================================================================
       INTEGER FDAY(NAPPL), FERTYP(NAPPL)
 
       INTEGER WAIT !PDI waiting for the arrival of the new data
-      INTEGER READ_RL_VALS, RUN_IT !
+      INTEGER READ_RL_VALS, RUN_SE !
 
       REAL DSOILN , FERDEPTH,  !, FERMIXPERC,
      &  FERNIT, FERPHOS, FERPOT, SOILNC, SOILNX
@@ -381,16 +381,16 @@ C-----------------------------------------------------------------------
 !       ------------------------------------------------------------------
 !       Notify the learner to exchange data
 !       ------------------------------------------------------------------
-        RUN_IT=1
-        CALL PDI_expose("RUN_SE", RUN_IT, PDI_IN)
+        RUN_SE=1
+        CALL PDI_expose("RUN_SE", RUN_SE, PDI_IN)
 !       ------------------------------------------------------------------
 !       Read some data from the learner to be feed into the fertilization process
 !       ------------------------------------------------------------------      
-	      ! CALL PDI_expose("RL_FERT_VAL",RL_FERT_VAL,PDI_IN)
-        ! FERDEP(1)=RL_FERT_VAL(1)
-        ! ANFER(1)=RL_FERT_VAL(2)
-        ! APFER(1)=RL_FERT_VAL(3)
-        ! AKFER(1)=RL_FERT_VAL(4)
+	      CALL PDI_expose("RL_FERT_VAL",RL_FERT_VAL,PDI_IN)
+        FERDEP(1)=RL_FERT_VAL(1)
+        ANFER(1)=RL_FERT_VAL(2)
+        APFER(1)=RL_FERT_VAL(3)
+        AKFER(1)=RL_FERT_VAL(4)
 
         PRINT *, ' AKFER(1): ', AKFER(1)
 
@@ -445,7 +445,8 @@ C       Convert character codes for fertilizer method into integer
 
         
 
-        PRINT *, 'Before the HASH expose !!', RUN_IT
+        PRINT *, 'Before the HASH expose !!', HASN
+
         CALL PDI_expose("HASN", HASN, PDI_OUT)
 !        CALL PDI_expose("HASP", HASP, PDI_OUT)
 !        CALL PDI_expose("HASK", HASK, PDI_OUT)

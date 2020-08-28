@@ -27,6 +27,10 @@ mkdir build; cd build
 # make sure that the include paths for the pdi lib is correct 
 cmake DCMAKE_BUILD_TYPE="DEBUG" -DCMAKE_PDI_INCLUDE="-I/usr/local/lib/gcc/x86_64-linux-gnu/9/finclude/ -I/usr/local/lib/pdi/finclude/GNU-9.3/" -DCMAKE_PDI_LIB="/usr/local/lib" -DCMAKE_INSTALL_PREFIX=~/dssat/BUILD ..
 
+cmake DCMAKE_BUILD_TYPE="DEBUG" -DCMAKE_PDI_INCLUDE="-I/home/emorsi/pdi/build/pdi/lib/gcc/x86_64-linux-gnu/8/finclude -I/home/emorsi/pdi/build/pdi/lib/pdi/finclude/GNU-8.3" -DCMAKE_PDI_LIB="/home/emorsi/pdi/build/pdi/lib" -DCMAKE_INSTALL_PREFIX=$HOME/DSSAT/dssat_run ..
+
+
+
 # Copy all require data files into you build directory 
 # Copy all files in the coupling directory to the build path 
 
