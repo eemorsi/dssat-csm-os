@@ -1,0 +1,456 @@
+FLOWVR Controller: graphite-2.nancy.grid5000.fr/6707/read
+FLOWVR Controller: graphite-2.nancy.grid5000.fr/6707/send
+ModuleAPI-MP: Connected to daemon FlowVR-Daemon 2.3.0 (GIT Revision 890345347f25d8b15342f9ce10ddb52779a2e2f5)
+parentname=graphite-2.nancy.grid5000.fr/6707
+parentname=/graphite-2.nancy.grid5000.fr/6707/read:P
+ModuleAPI-MP: Connected to daemon FlowVR-Daemon 2.3.0 (GIT Revision 890345347f25d8b15342f9ce10ddb52779a2e2f5)
+FLOWVR_PARENT= /graphite-2.nancy.grid5000.fr/6707/read:P
+Processing pytest.run.xml
+Forked env with pid 6710, script: "flowvr-run-ssh -v ' localhost ' ./cputter"
+Forked learner with pid 6712, script: "flowvr-run-ssh -v ' localhost ' python3 learner.py"
+Processing pytest.cmd.xml
+Run on localhost: eval exec flowvr-run-env -E --path /home/emorsi/workspace/dssat-csm-os/PyTemp -v -e FLOWVR_PARENT "/graphite-2.nancy.grid5000.fr/6707/read:P" -e FLOWVR_MODNAME "learner" -v python3 learner.py &
+Run on localhost: eval exec flowvr-run-env -E --path /home/emorsi/workspace/dssat-csm-os/PyTemp -v -e FLOWVR_PARENT "/graphite-2.nancy.grid5000.fr/6707/read:P" -e FLOWVR_MODNAME "env" -v ./cputter &
+SETTING FLOWVR_PARENT = /graphite-2.nancy.grid5000.fr/6707/read:P
+SETTING FLOWVR_MODNAME = env
+SETTING FLOWVR_PARENT = /graphite-2.nancy.grid5000.fr/6707/read:P
+SETTING FLOWVR_MODNAME = learner
+exec ./cputter
+exec python3 learner.py
+[PDI][13:14:18] *** debug: Metadata is not defined in specification tree
+[PDI][13:14:18] *** debug: (FlowVR) Module: wait_on_data = RUN_SE
+[PDI][13:14:18] *** debug: (FlowVR) Module: Loaded basic configuration
+[PDI][13:14:18] *** debug: (FlowVR) Data Payload (rlval): Data descriptor = RL_FERT_VAL
+[PDI][13:14:18] *** debug: (FlowVR) Input Data Payload (rlval): Created
+[PDI][13:14:18] *** debug: (FlowVR) Input Port (rlval): Created input port with 0 stamps
+[PDI][13:14:18] *** debug: (FlowVR) Module: Loaded input ports
+[PDI][13:14:18] *** debug: (FlowVR) Data Payload (text): Data descriptor = HASN
+[PDI][13:14:18] *** debug: (FlowVR) Output Data Payload (text): Created
+[PDI][13:14:18] *** debug: (FlowVR) Output Port (text): Created output port with 0 stamps
+[PDI][13:14:18] *** debug: (FlowVR) Module: Loaded output ports
+[PDI][13:14:18] *** debug: (FlowVR) Module: Loaded traces
+[PDI][13:14:18] *** debug: (FlowVR) Module (): Loaded name
+FLOWVR Module name: env
+FLOWVR Parent  name: /graphite-2.nancy.grid5000.fr/6707/read:P
+ModuleAPI-MP: Connected to daemon FlowVR-Daemon 2.3.0 (GIT Revision 890345347f25d8b15342f9ce10ddb52779a2e2f5)
+[PDI][13:14:18] *** debug: (FlowVR) Module (): Initialized flowvr module
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:18] *** debug: (FlowVR) Module (env): Logger updated
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:18] *** info: (FlowVR) Module (env): Module initialized
+[PDI][13:14:18] *** info: Initialization successful
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:18] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+News: new module env at graphite-2.nancy.grid5000.fr
+[PDI][13:14:19] *** debug: Metadata is not defined in specification tree
+[PDI][13:14:19] *** debug: (FlowVR) Module: wait_on_data = RUN_SE
+[PDI][13:14:19] *** debug: (FlowVR) Module: Abort on finalize = true
+[PDI][13:14:19] *** debug: (FlowVR) Module: Loaded basic configuration
+[PDI][13:14:19] *** debug: (FlowVR) Data Payload (text): Data descriptor = HASN
+[PDI][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Created
+[PDI][13:14:19] *** debug: (FlowVR) Input Port (text): Created input port with 0 stamps
+[PDI][13:14:19] *** debug: (FlowVR) Module: Loaded input ports
+[PDI][13:14:19] *** debug: (FlowVR) Data Payload (rlval): Data descriptor = RL_FERT_VAL
+[PDI][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Created
+[PDI][13:14:19] *** debug: (FlowVR) Output Port (rlval): Created output port with 0 stamps
+[PDI][13:14:19] *** debug: (FlowVR) Module: Loaded output ports
+[PDI][13:14:19] *** debug: (FlowVR) Module: Loaded traces
+[PDI][13:14:19] *** debug: (FlowVR) Module (): Loaded name
+FLOWVR Module name: learner
+FLOWVR Parent  name: /graphite-2.nancy.grid5000.fr/6707/read:P
+ModuleAPI-MP: Connected to daemon FlowVR-Daemon 2.3.0 (GIT Revision 890345347f25d8b15342f9ce10ddb52779a2e2f5)
+[PDI][13:14:19] *** debug: (FlowVR) Module (): Initialized flowvr module
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Logger updated
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** info: (FlowVR) Module (learner): Module initialized
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+News: new module learner at graphite-2.nancy.grid5000.fr
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 0 B
+RL_FERT_VAL[0]: 0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 0
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+>[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: -0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 1
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: -0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 2
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: 0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: -0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 4
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: 0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 5
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: 0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 6
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: 272008320221930669998080.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 7
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: -0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 8
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: -107374184.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 9
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: 0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 10
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: -0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 11
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: 0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 12
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: -107374184.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 13
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: 272008320221930669998080.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 14
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: 0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 15
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: -0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 16
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: 0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 17
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: -107374184.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 18
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: 272008320221930669998080.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 19
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload  (rlval): Copy data from FlowVR memory to `RL_FERT_VAL' descriptor
+RL_FERT_VAL[0]: 0.000000
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Allocating 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Payload (text): Copy data from `HASN' descriptor to flowvr memory
+C HASN: 20
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Output Data Payload (text): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload (text): Received 4 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Allocating 16 B
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Payload (rlval): Copy data from `RL_FERT_VAL' descriptor to flowvr memory
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Input Data Payload  (text): Copy data from FlowVR memory to `HASN' descriptor
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Output Data Payload (rlval): Putting message
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:19] *** debug: (FlowVR) Module (learner): Calling flowvr_module->wait()
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): `wait' returned status: 3
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Input Data Payload (rlval): Received 16 B
+[PDI][13:14:19] *** info: Finalization
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Close flowvr module 
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Clear traces
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Clear plugins intput ports
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** debug: (FlowVR) Module (env): Clear plugins output ports
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/env][13:14:19] *** info: (FlowVR) Module (env): Module finalized
+>[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:25] *** warning: (FlowVR) Module (learner): `wait' returned status: 0
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:25] *** debug: (FlowVR) Module (learner): Abort on finalize
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:25] *** debug: (FlowVR) Module (learner): Close flowvr module 
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:25] *** debug: (FlowVR) Module (learner): Clear traces
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:25] *** debug: (FlowVR) Module (learner): Clear plugins intput ports
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:25] *** debug: (FlowVR) Module (learner): Clear plugins output ports
+[PDI][/graphite-2.nancy.grid5000.fr/6707/read:P/learner][13:14:25] *** info: (FlowVR) Module (learner): Module finalized
+Python: from the while loop
+PY HASN: 0
+Python: from the while loop
+PY HASN: 1
+Python: from the while loop
+PY HASN: 2
+Python: from the while loop
+PY HASN: 3
+Python: from the while loop
+PY HASN: 4
+Python: from the while loop
+PY HASN: 5
+Python: from the while loop
+PY HASN: 6
+Python: from the while loop
+PY HASN: 7
+Python: from the while loop
+PY HASN: 8
+Python: from the while loop
+PY HASN: 9
+Python: from the while loop
+PY HASN: 10
+Python: from the while loop
+PY HASN: 11
+Python: from the while loop
+PY HASN: 12
+Python: from the while loop
+PY HASN: 13
+Python: from the while loop
+PY HASN: 14
+Python: from the while loop
+PY HASN: 15
+Python: from the while loop
+PY HASN: 16
+Python: from the while loop
+PY HASN: 17
+Python: from the while loop
+PY HASN: 18
+Python: from the while loop
+PY HASN: 19
+Python: from the while loop
+PY HASN: 20
+>Flowvr PYTEST done!
